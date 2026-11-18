@@ -1,0 +1,20 @@
+{
+  "version": "0.2",
+  "language": "en-US",
+  "dictionaryDefinitions": [
+    {
+      "name": "media-words",
+      "path": "./dictionaries/words.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": [
+    "media-words"
+  ],
+  "ignorePaths": [
+    "dist/**",
+    "node_modules/**",
+    "scratch/**",
+    "package-lock.json"
+  ]
+}

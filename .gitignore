@@ -1,0 +1,10 @@
+node_modules/
+
+# Written by npm run build; CI commits it with git add -f.
+dist/
+
+# Generated working files. Nothing here is committed; anything worth keeping
+# belongs in a GitHub issue.
+scratch/
+
+.DS_Store

@@ -1,0 +1,74 @@
+name: Build
+
+# Builds dist/ from the outline records on every push to main, commits it when it changed, and tells
+# open-paleo/web to rebuild the site.
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+# One build at a time, so a second push's build does not race the first's commit.
+concurrency:
+  group: build-main
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build outputs
+        run: npm run build
+
+      - name: Generate type bindings
+        run: npm run generate-bindings
+
+      # dist/ is ignored locally, so it is added with -f. On a rejected push (an outline commit landed
+      # while this ran), rebase the build commit onto main and try again.
+      - name: Commit build outputs
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f dist/
+          if git diff --cached --quiet -- dist/; then
+            exit 0
+          fi
+          git commit -m "build: update output files"
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            git fetch --deepen=50 origin main
+            git rebase origin/main
+          done
+          echo "Push still rejected after three attempts" >&2
+          exit 1
+
+      # The built-in GITHUB_TOKEN cannot dispatch to another repository, so this uses the
+      # fine-grained WEB_DISPATCH_TOKEN. A missed dispatch must not fail the build: the site also
+      # rebuilds nightly. -f, not -F, so an all-digit SHA is still sent as a string.
+      - name: Tell the web repository the media changed
+        if: steps.commit.outputs.sha != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.WEB_DISPATCH_TOKEN }}
+          SHA: ${{ steps.commit.outputs.sha }}
+        run: |
+          gh api repos/open-paleo/web/dispatches \
+            -f event_type=media-updated -f "client_payload[sha]=$SHA"

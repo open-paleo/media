@@ -1,0 +1,33 @@
+{
+  "name": "open-paleo-media",
+  "version": "1.0.0",
+  "description": "Images for Open Paleo: outlines of dinosaur groups, with their creators and licenses",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "validate": "node --experimental-strip-types scripts/validate.ts",
+    "build": "node --experimental-strip-types scripts/build.ts",
+    "generate-bindings": "mkdir -p dist/bindings && json2ts schemas/media.schema.json -o dist/bindings/media.d.ts",
+    "spellcheck": "cspell --no-progress --no-summary \"outlines/*.yml\" \"*.md\"",
+    "lint": "eslint scripts/",
+    "typecheck": "node node_modules/typescript7/bin/tsc --noEmit"
+  },
+  "license": "CC-BY-4.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@stylistic/eslint-plugin": "5.10.0",
+    "@types/node": "24.19.2",
+    "cspell": "10.4.0",
+    "eslint": "10.13.0",
+    "json-schema-to-typescript": "16.0.0",
+    "typescript": "npm:@typescript/typescript6@6.0.2",
+    "typescript-eslint": "8.72.1",
+    "typescript7": "npm:typescript@7.0.2"
+  }
+}
