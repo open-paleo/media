@@ -7,7 +7,7 @@ import { parse } from "yaml";
 // Reads the outline records and their SVG files, and finds problems in them.
 
 /**
- * An outline: an SVG file and the record that says what it shows and where it came from.
+ * An outline: an SVG file and its record, which describes it and gives its source.
  */
 export type Outline = {
     /**
