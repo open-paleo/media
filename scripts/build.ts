@@ -76,7 +76,7 @@ type MediaOutput = {
     _metadata: Metadata;
 
     /**
-     * The outlines, by the clade each stands for.
+     * The outlines, by the genus or clade each stands for.
      */
     outlines: Record<string, OutlineOutput>;
 };
@@ -170,8 +170,9 @@ for (const outline of source.outlines)
 
     const cleaned = cleanSvg(outline.svg);
 
+    fs.mkdirSync(path.dirname(path.join(distDirectory, file)), { recursive: true });
     fs.writeFileSync(path.join(distDirectory, file), outline.isMirrored ? mirrorSvg(cleaned) : cleaned);
-    outlines[outline.clade] = {
+    outlines[outline.taxon] = {
         file,
         title: outline.title,
         depicts: outline.depicts,

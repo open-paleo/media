@@ -29,16 +29,16 @@ covers outlines too.
 
 ## Adding an outline
 
-An outline shows a typical member of a clade, drawn as one dark shape, as a side view of the
-whole animal facing left. Most come from [PhyloPic](https://www.phylopic.org), whose silhouettes
+An outline shows a genus, or a typical member of a clade, drawn as one dark shape, as a side
+view of the whole animal facing left. Most come from [PhyloPic](https://www.phylopic.org), whose silhouettes
 list their creator and license; take only those under the licenses above.
 
-1. Save the SVG as `outlines/<clade>.svg`, named after the clade in lowercase words joined by
-   hyphens: `outlines/titanosauria.svg`.
-2. Add `outlines/<clade>.yml` beside it:
+1. Save the SVG in the folder of the name's first letter, named after the genus or clade in
+   lowercase words joined by hyphens: `outlines/t/titanosauria.svg`.
+2. Add a record of the same name beside it, `outlines/t/titanosauria.yml`:
 
    ```yaml
-   clade: Titanosauria
+   taxon: Titanosauria
    title: Outline of a titanosaur
    depicts: Saltasaurus loricatus
    creator: Jane Doe
@@ -48,15 +48,15 @@ list their creator and license; take only those under the licenses above.
 
 | Field | What it holds |
 |---|---|
-| `clade` | The clade the outline stands for, spelled as the Open Paleo dataset names it. One outline per clade. |
-| `title` | The caption, saying what the outline shows: "Outline of a titanosaur", not the name of one genus. |
+| `taxon` | The genus or clade the outline stands for, spelled as the Open Paleo dataset names it. One outline per taxon. |
+| `title` | The caption: "Outline of a titanosaur" for a clade's outline. |
 | `depicts` | The taxon the outline was drawn from, as the source names it, so captions can say "based on…". |
 | `creator` | The artist, as the source credits them. |
 | `source` | The `https://` address the outline came from. |
 | `license` | `CC0-1.0`, `PDM-1.0`, `CC-BY-3.0`, `CC-BY-4.0`, `CC-BY-SA-3.0` or `CC-BY-SA-4.0`. |
 | `mirrored` | Optional: `true` to flip the outline horizontally in the build, when it faces right. |
 
-Pick the clade that the outline fits: a genus takes the outline of the nearest clade above it
+A genus shows its own outline if it has one, and otherwise that of the nearest clade above it
 that has one, so a broad clade's outline should look right for most of its members.
 
 The SVG must have a `viewBox`, and may not contain scripts, event handlers, embedded images or
@@ -77,7 +77,8 @@ npm run typecheck
 ```
 
 `validate` checks that each SVG has a record and each record an SVG, that records have every field
-and no others, that the license is one allowed, that no clade has two outlines, and that each SVG
+and no others, that each file is in the folder of its first letter, that the license is one
+allowed, that no taxon has two outlines, and that each SVG
 is safe to put in a page. Add words the spell check doesn't know, such as clade names, to
 `dictionaries/words.txt`.
 

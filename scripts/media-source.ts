@@ -11,14 +11,14 @@ import { parse } from "yaml";
  */
 export type Outline = {
     /**
-     * The file name without its extension, such as "titanosauria".
+     * The file's path under outlines/ without its extension, such as "t/titanosauria".
      */
     id: string;
 
     /**
-     * The clade the outline stands for, as the dataset names it.
+     * The genus or clade the outline stands for, as the dataset names it.
      */
-    clade: string;
+    taxon: string;
 
     /**
      * What the outline shows, for its caption: "Outline of a titanosaur".
@@ -80,7 +80,7 @@ const outlinesDirectory = path.join(rootDirectory, "outlines");
 export const allowedLicenses = new Set(["CC0-1.0", "PDM-1.0", "CC-BY-3.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC-BY-SA-4.0"]);
 
 // The fields an outline record may have.
-const outlineFields = new Set(["clade", "title", "depicts", "creator", "source", "license", "mirrored"]);
+const outlineFields = new Set(["taxon", "title", "depicts", "creator", "source", "license", "mirrored"]);
 
 // The largest SVG file accepted, in bytes; outlines are simple shapes.
 const maximumSvgBytes = 200_000;
@@ -149,7 +149,7 @@ function checkSvg(svg: string, file: string, problems: Array<string>): void
 /**
  * Read one outline's record and SVG file.
  *
- * @param id - The outline's file name without its extension.
+ * @param id - The outline's path under outlines/ without its extension, such as "t/titanosauria".
  * @param problems - Where to add problems.
  * @returns The outline, or undefined if its files cannot be used.
  */
@@ -187,9 +187,9 @@ function readOutline(id: string, problems: Array<string>): Outline | undefined
         }
     }
 
-    if (!isCleanText(fields.clade) || !isCleanText(fields.title) || !isCleanText(fields.depicts) || !isCleanText(fields.creator) || !isCleanText(fields.source) || !isCleanText(fields.license))
+    if (!isCleanText(fields.taxon) || !isCleanText(fields.title) || !isCleanText(fields.depicts) || !isCleanText(fields.creator) || !isCleanText(fields.source) || !isCleanText(fields.license))
     {
-        problems.push(recordFile + ": needs a clade, a title, the taxon it depicts, a creator, a source and a license");
+        problems.push(recordFile + ": needs a taxon, a title, the taxon it depicts, a creator, a source and a license");
 
         return undefined;
     }
@@ -222,7 +222,7 @@ function readOutline(id: string, problems: Array<string>): Outline | undefined
 
     return {
         id,
-        clade: fields.clade,
+        taxon: fields.taxon,
         title: fields.title,
         depicts: fields.depicts,
         isMirrored: fields.mirrored === true,
@@ -234,6 +234,60 @@ function readOutline(id: string, problems: Array<string>): Outline | undefined
 }
 
 /**
+ * Find the outline files: each in the folder of its first letter, such as outlines/t/.
+ *
+ * @param problems - Where to add problems about files in the wrong place.
+ * @returns The paths of the records and of the SVG files, under outlines/ and without their
+ * extensions.
+ */
+function findOutlineFiles(problems: Array<string>): [Set<string>, Set<string>]
+{
+    const recordIds = new Set<string>();
+    const svgIds = new Set<string>();
+
+    for (const folder of fs.readdirSync(outlinesDirectory, { withFileTypes: true }))
+    {
+        if (!folder.isDirectory())
+        {
+            problems.push("outlines/" + folder.name + ": outlines go in the folder of their first letter, such as outlines/t/");
+            continue;
+        }
+
+        if (!/^[a-z0-9]$/.test(folder.name))
+        {
+            problems.push("outlines/" + folder.name + "/: folders are single lowercase letters or digits");
+            continue;
+        }
+
+        for (const name of fs.readdirSync(path.join(outlinesDirectory, folder.name)).sort())
+        {
+            const extension = path.extname(name);
+            const base = path.basename(name, extension);
+            const id = folder.name + "/" + base;
+
+            if (extension !== ".yml" && extension !== ".svg")
+            {
+                problems.push("outlines/" + id + extension + ": only .yml records and .svg outlines belong here");
+            }
+            else if (!base.startsWith(folder.name))
+            {
+                problems.push("outlines/" + id + extension + ": belongs in outlines/" + base.charAt(0) + "/");
+            }
+            else if (!idPattern.test(base))
+            {
+                problems.push("outlines/" + id + extension + ": file names are lowercase words joined by hyphens");
+            }
+            else
+            {
+                (extension === ".yml" ? recordIds : svgIds).add(id);
+            }
+        }
+    }
+
+    return [recordIds, svgIds];
+}
+
+/**
  * Read the outlines and check them.
  *
  * @returns The outlines and any problems.
@@ -242,45 +296,20 @@ export function readMediaSource(): MediaSource
 {
     const problems = new Array<string>();
     const outlines = new Array<Outline>();
-    const ids = new Set<string>();
-    const svgIds = new Set<string>();
-
-    for (const name of fs.readdirSync(outlinesDirectory).sort())
-    {
-        const extension = path.extname(name);
-        const id = path.basename(name, extension);
-
-        if (extension === ".yml")
-        {
-            ids.add(id);
-        }
-        else if (extension === ".svg")
-        {
-            svgIds.add(id);
-        }
-        else if (name !== ".gitkeep")
-        {
-            problems.push("outlines/" + name + ": only .yml records and .svg outlines belong here");
-        }
-    }
+    const [recordIds, svgIds] = findOutlineFiles(problems);
 
     for (const id of svgIds)
     {
-        if (!ids.has(id))
+        if (!recordIds.has(id))
         {
             problems.push("outlines/" + id + ".svg: has no outlines/" + id + ".yml record");
         }
     }
 
-    const outlineByClade = new Map<string, string>();
+    const outlineByTaxon = new Map<string, string>();
 
-    for (const id of ids)
+    for (const id of [...recordIds].sort())
     {
-        if (!idPattern.test(id))
-        {
-            problems.push("outlines/" + id + ".yml: file names are lowercase words joined by hyphens");
-        }
-
         const outline = readOutline(id, problems);
 
         if (!outline)
@@ -288,14 +317,14 @@ export function readMediaSource(): MediaSource
             continue;
         }
 
-        const earlier = outlineByClade.get(outline.clade);
+        const earlier = outlineByTaxon.get(outline.taxon);
 
         if (earlier)
         {
-            problems.push("outlines/" + id + ".yml: " + outline.clade + " already has an outline, " + earlier);
+            problems.push("outlines/" + id + ".yml: " + outline.taxon + " already has an outline, " + earlier);
         }
 
-        outlineByClade.set(outline.clade, id);
+        outlineByTaxon.set(outline.taxon, id);
         outlines.push(outline);
     }
 

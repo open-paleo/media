@@ -8,7 +8,7 @@
     "validate": "node --experimental-strip-types scripts/validate.ts",
     "build": "node --experimental-strip-types scripts/build.ts",
     "generate-bindings": "mkdir -p dist/bindings && json2ts schemas/media.schema.json -o dist/bindings/media.d.ts",
-    "spellcheck": "cspell --no-progress --no-summary \"outlines/*.yml\" \"*.md\"",
+    "spellcheck": "cspell --no-progress --no-summary \"outlines/**/*.yml\" \"*.md\"",
     "lint": "eslint scripts/",
     "typecheck": "node node_modules/typescript7/bin/tsc --noEmit"
   },

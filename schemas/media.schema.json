@@ -9,7 +9,7 @@
   "properties": {
     "_metadata": { "$ref": "#/$defs/Metadata" },
     "outlines": {
-      "description": "The outlines, by the name of the clade each stands for, as the Open Paleo dataset names it. A genus takes the outline of the nearest clade above it that has one.",
+      "description": "The outlines, by the name of the genus or clade each stands for, as the Open Paleo dataset names it. A genus shows its own outline if it has one, and otherwise that of the nearest clade above it that has one.",
       "type": "object",
       "additionalProperties": { "$ref": "#/$defs/Outline" }
     }
@@ -24,19 +24,19 @@
         "schema_version": {
           "description": "The version of this schema the output follows. A new major version is a breaking change.",
           "type": "string",
-          "const": "1.1.0"
+          "const": "1.2.0"
         },
         "license": { "description": "How the images are licensed.", "type": "string" },
         "outline_count": { "description": "How many outlines there are.", "type": "integer", "minimum": 0 }
       }
     },
     "Outline": {
-      "description": "An outline of a typical member of a clade.",
+      "description": "An outline of a genus, or of a typical member of a clade.",
       "type": "object",
       "additionalProperties": false,
       "required": ["file", "title", "depicts", "changes", "creator", "source", "license"],
       "properties": {
-        "file": { "description": "The cleaned SVG file, relative to dist/: drawn in currentColor, with a viewBox and no fixed size.", "type": "string" },
+        "file": { "description": "The cleaned SVG file, relative to dist/, such as \"outlines/s/sauropoda.svg\": drawn in currentColor, with a viewBox and no fixed size.", "type": "string" },
         "title": { "description": "What the outline shows, for its caption: \"Outline of a titanosaur\".", "type": "string" },
         "depicts": { "description": "The taxon the outline was drawn from, such as \"Camarasaurus supremus\".", "type": "string" },
         "changes": { "description": "How the file differs from the creator's original, for credit lines: \"Recolored\", or \"Recolored; flipped horizontally\".", "type": "string" },
