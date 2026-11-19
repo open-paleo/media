@@ -41,6 +41,16 @@ type OutlineOutput = {
     title: string;
 
     /**
+     * The taxon the outline was drawn from.
+     */
+    depicts: string;
+
+    /**
+     * How the cleaned file differs from the original, for credit lines that must say so.
+     */
+    changes: string;
+
+    /**
      * Who drew it.
      */
     creator: string;
@@ -84,6 +94,28 @@ function readSchemaVersion(): string
     const schema = JSON.parse(fs.readFileSync(schemaPath, "utf8"));
 
     return schema.$defs.Metadata.properties.schema_version.const;
+}
+
+/**
+ * Flip an outline horizontally within its viewBox, wrapping its contents in a mirroring group.
+ *
+ * @param svg - The cleaned SVG.
+ * @returns The flipped SVG.
+ */
+function mirrorSvg(svg: string): string
+{
+    const viewBox = /viewBox\s*=\s*["']\s*([-\d.]+)[\s,]+([-\d.]+)[\s,]+([-\d.]+)[\s,]+([-\d.]+)\s*["']/.exec(svg);
+
+    if (!viewBox)
+    {
+        return svg;
+    }
+
+    const offset = 2 * Number(viewBox[1]) + Number(viewBox[3]);
+    const rootEnd = svg.indexOf(">", svg.search(/<svg\b/i)) + 1;
+    const closing = svg.lastIndexOf("</svg>");
+
+    return svg.slice(0, rootEnd) + "<g transform=\"matrix(-1 0 0 1 " + offset + " 0)\">" + svg.slice(rootEnd, closing) + "</g>" + svg.slice(closing);
 }
 
 /**
@@ -136,8 +168,18 @@ for (const outline of source.outlines)
 {
     const file = "outlines/" + outline.id + ".svg";
 
-    fs.writeFileSync(path.join(distDirectory, file), cleanSvg(outline.svg));
-    outlines[outline.clade] = { file, title: outline.title, creator: outline.creator, source: outline.source, license: outline.license };
+    const cleaned = cleanSvg(outline.svg);
+
+    fs.writeFileSync(path.join(distDirectory, file), outline.isMirrored ? mirrorSvg(cleaned) : cleaned);
+    outlines[outline.clade] = {
+        file,
+        title: outline.title,
+        depicts: outline.depicts,
+        changes: outline.isMirrored ? "Recolored; flipped horizontally" : "Recolored",
+        creator: outline.creator,
+        source: outline.source,
+        license: outline.license,
+    };
 }
 
 const media: MediaOutput = {

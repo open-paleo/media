@@ -16,5 +16,8 @@
     "node_modules/**",
     "scratch/**",
     "package-lock.json"
+  ],
+  "ignoreRegExpList": [
+    "/^(depicts|creator):.*$/gm"
   ]
 }

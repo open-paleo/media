@@ -17,9 +17,10 @@ outline, is interpretive work by an artist, and there is no source to check it a
 covers outlines too.
 
 - **The image must be openly licensed:** your own work, which you license under CC BY 4.0 by
-  submitting it, or someone else's under CC0 1.0, CC BY 3.0 or CC BY 4.0. Licenses that forbid
-  commercial use or require adaptations to be shared alike are not accepted, since they would
-  set conditions on the site and on everyone reusing the images.
+  submitting it, or someone else's under CC0 1.0, the Public Domain Mark, CC BY 3.0 or 4.0, or
+  CC BY-SA 3.0 or 4.0. A share-alike image's cleaned copy keeps its license. Licenses that forbid
+  commercial use are not accepted, since they would set conditions on the site and on everyone
+  reusing the images.
 - **No watermarked or heavily manipulated images.** Specimen photos should be unmodified. Life
   reconstructions should be clearly labeled as such.
 - **Credit the creator.** Every image names its photographer, artist, or institution accurately,
@@ -28,9 +29,9 @@ covers outlines too.
 
 ## Adding an outline
 
-An outline shows a typical member of a clade, drawn as one dark shape. Most come from
-[PhyloPic](https://www.phylopic.org), whose silhouettes list their creator and license; take only
-those under CC0 1.0, CC BY 3.0 or CC BY 4.0.
+An outline shows a typical member of a clade, drawn as one dark shape, as a side view of the
+whole animal facing left. Most come from [PhyloPic](https://www.phylopic.org), whose silhouettes
+list their creator and license; take only those under the licenses above.
 
 1. Save the SVG as `outlines/<clade>.svg`, named after the clade in lowercase words joined by
    hyphens: `outlines/titanosauria.svg`.
@@ -39,6 +40,7 @@ those under CC0 1.0, CC BY 3.0 or CC BY 4.0.
    ```yaml
    clade: Titanosauria
    title: Outline of a titanosaur
+   depicts: Saltasaurus loricatus
    creator: Jane Doe
    source: https://www.phylopic.org/images/…
    license: CC-BY-3.0
@@ -48,16 +50,20 @@ those under CC0 1.0, CC BY 3.0 or CC BY 4.0.
 |---|---|
 | `clade` | The clade the outline stands for, spelled as the Open Paleo dataset names it. One outline per clade. |
 | `title` | The caption, saying what the outline shows: "Outline of a titanosaur", not the name of one genus. |
+| `depicts` | The taxon the outline was drawn from, as the source names it, so captions can say "based on…". |
 | `creator` | The artist, as the source credits them. |
 | `source` | The `https://` address the outline came from. |
-| `license` | `CC0-1.0`, `CC-BY-3.0` or `CC-BY-4.0`. |
+| `license` | `CC0-1.0`, `PDM-1.0`, `CC-BY-3.0`, `CC-BY-4.0`, `CC-BY-SA-3.0` or `CC-BY-SA-4.0`. |
+| `mirrored` | Optional: `true` to flip the outline horizontally in the build, when it faces right. |
 
 Pick the clade that the outline fits: a genus takes the outline of the nearest clade above it
 that has one, so a broad clade's outline should look right for most of its members.
 
 The SVG must have a `viewBox`, and may not contain scripts, event handlers, embedded images or
 links to other files. The build removes its fixed size and black fills so the site can draw it in
-its own colors; don't edit the shape itself.
+its own colors, and flips it if the record asks; don't edit the file itself. The output notes
+these changes ("Recolored; flipped horizontally"), since CC BY asks that credit lines say what
+was changed.
 
 ## Checks
 

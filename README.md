@@ -13,11 +13,13 @@ JSON Schema the output follows (`dist/media.schema.json`) and TypeScript types
 
 ```json
 {
-  "_metadata": { "schema_version": "1.0.0", "license": "Each image keeps the license in its record; everything else is CC-BY-4.0", "outline_count": 1 },
+  "_metadata": { "schema_version": "1.1.0", "license": "Each image keeps the license in its record; everything else is CC-BY-4.0", "outline_count": 1 },
   "outlines": {
     "Titanosauria": {
       "file": "outlines/titanosauria.svg",
       "title": "Outline of a titanosaur",
+      "depicts": "Saltasaurus loricatus",
+      "changes": "Recolored",
       "creator": "Jane Doe",
       "source": "https://www.phylopic.org/images/…",
       "license": "CC-BY-3.0"
@@ -45,9 +47,10 @@ clade it stands for, its caption, its creator, its source and its license.
 
 ## License
 
-**Each image keeps the license it came with,** recorded in its YAML file: CC0 1.0, CC BY 3.0 or
-CC BY 4.0. Anyone using an image must credit its creator as its license requires; the record gives
-the creator and the source. Images contributed as original work, the records, the scripts and
+**Each image keeps the license it came with,** recorded in its YAML file: CC0 1.0, the Public
+Domain Mark, CC BY 3.0 or 4.0, or CC BY-SA 3.0 or 4.0; none forbids commercial use. Anyone using
+an image must credit its creator as its license requires, noting the changes the output lists;
+the record gives the creator and the source. Images contributed as original work, the records, the scripts and
 the docs are licensed under [CC BY 4.0](LICENSE); credit "Open Paleo contributors".
 
 **AI-generated art is not accepted.** See [CONTRIBUTING.md](CONTRIBUTING.md#image-requirements).

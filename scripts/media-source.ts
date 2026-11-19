@@ -26,6 +26,16 @@ export type Outline = {
     title: string;
 
     /**
+     * The taxon the outline was drawn from, such as "Camarasaurus supremus".
+     */
+    depicts: string;
+
+    /**
+     * Whether the build flips the outline horizontally, so it faces the same way as the others.
+     */
+    isMirrored: boolean;
+
+    /**
      * Who drew it.
      */
     creator: string;
@@ -65,11 +75,12 @@ export const rootDirectory = path.join(path.dirname(url.fileURLToPath(import.met
 
 const outlinesDirectory = path.join(rootDirectory, "outlines");
 
-// The licenses an image may carry: none that would add conditions to the site using it.
-export const allowedLicenses = new Set(["CC0-1.0", "CC-BY-3.0", "CC-BY-4.0"]);
+// The licenses an image may carry. Share-alike images are allowed: the cleaned copy keeps the
+// same license. Non-commercial ones are not.
+export const allowedLicenses = new Set(["CC0-1.0", "PDM-1.0", "CC-BY-3.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC-BY-SA-4.0"]);
 
 // The fields an outline record may have.
-const outlineFields = new Set(["clade", "title", "creator", "source", "license"]);
+const outlineFields = new Set(["clade", "title", "depicts", "creator", "source", "license", "mirrored"]);
 
 // The largest SVG file accepted, in bytes; outlines are simple shapes.
 const maximumSvgBytes = 200_000;
@@ -176,11 +187,16 @@ function readOutline(id: string, problems: Array<string>): Outline | undefined
         }
     }
 
-    if (!isCleanText(fields.clade) || !isCleanText(fields.title) || !isCleanText(fields.creator) || !isCleanText(fields.source) || !isCleanText(fields.license))
+    if (!isCleanText(fields.clade) || !isCleanText(fields.title) || !isCleanText(fields.depicts) || !isCleanText(fields.creator) || !isCleanText(fields.source) || !isCleanText(fields.license))
     {
-        problems.push(recordFile + ": needs a clade, a title, a creator, a source and a license");
+        problems.push(recordFile + ": needs a clade, a title, the taxon it depicts, a creator, a source and a license");
 
         return undefined;
+    }
+
+    if (fields.mirrored !== undefined && typeof fields.mirrored !== "boolean")
+    {
+        problems.push(recordFile + ": mirrored must be true or false");
     }
 
     if (!allowedLicenses.has(fields.license))
@@ -204,7 +220,17 @@ function readOutline(id: string, problems: Array<string>): Outline | undefined
 
     checkSvg(svg, svgFile, problems);
 
-    return { id, clade: fields.clade, title: fields.title, creator: fields.creator, source: fields.source, license: fields.license, svg };
+    return {
+        id,
+        clade: fields.clade,
+        title: fields.title,
+        depicts: fields.depicts,
+        isMirrored: fields.mirrored === true,
+        creator: fields.creator,
+        source: fields.source,
+        license: fields.license,
+        svg,
+    };
 }
 
 /**
