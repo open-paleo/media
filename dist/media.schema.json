@@ -24,7 +24,7 @@
         "schema_version": {
           "description": "The version of this schema the output follows. A new major version is a breaking change.",
           "type": "string",
-          "const": "1.0.0"
+          "const": "1.1.0"
         },
         "license": { "description": "How the images are licensed.", "type": "string" },
         "outline_count": { "description": "How many outlines there are.", "type": "integer", "minimum": 0 }
@@ -34,13 +34,15 @@
       "description": "An outline of a typical member of a clade.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["file", "title", "creator", "source", "license"],
+      "required": ["file", "title", "depicts", "changes", "creator", "source", "license"],
       "properties": {
         "file": { "description": "The cleaned SVG file, relative to dist/: drawn in currentColor, with a viewBox and no fixed size.", "type": "string" },
         "title": { "description": "What the outline shows, for its caption: \"Outline of a titanosaur\".", "type": "string" },
+        "depicts": { "description": "The taxon the outline was drawn from, such as \"Camarasaurus supremus\".", "type": "string" },
+        "changes": { "description": "How the file differs from the creator's original, for credit lines: \"Recolored\", or \"Recolored; flipped horizontally\".", "type": "string" },
         "creator": { "description": "Who drew it, to be credited wherever it is shown.", "type": "string" },
         "source": { "description": "Where it came from, such as its PhyloPic page.", "type": "string" },
-        "license": { "description": "Its license, as an SPDX id: CC0-1.0, CC-BY-3.0 or CC-BY-4.0.", "type": "string", "enum": ["CC0-1.0", "CC-BY-3.0", "CC-BY-4.0"] }
+        "license": { "description": "Its license, as an SPDX id. Share-alike outlines keep their license in the cleaned copy.", "type": "string", "enum": ["CC0-1.0", "PDM-1.0", "CC-BY-3.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC-BY-SA-4.0"] }
       }
     }
   }

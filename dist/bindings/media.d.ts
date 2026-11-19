@@ -24,7 +24,7 @@ export interface Metadata {
   /**
    * The version of this schema the output follows. A new major version is a breaking change.
    */
-  schema_version: "1.0.0";
+  schema_version: "1.1.0";
   /**
    * How the images are licensed.
    */
@@ -47,6 +47,14 @@ export interface Outline {
    */
   title: string;
   /**
+   * The taxon the outline was drawn from, such as "Camarasaurus supremus".
+   */
+  depicts: string;
+  /**
+   * How the file differs from the creator's original, for credit lines: "Recolored", or "Recolored; flipped horizontally".
+   */
+  changes: string;
+  /**
    * Who drew it, to be credited wherever it is shown.
    */
   creator: string;
@@ -55,7 +63,7 @@ export interface Outline {
    */
   source: string;
   /**
-   * Its license, as an SPDX id: CC0-1.0, CC-BY-3.0 or CC-BY-4.0.
+   * Its license, as an SPDX id. Share-alike outlines keep their license in the cleaned copy.
    */
-  license: "CC0-1.0" | "CC-BY-3.0" | "CC-BY-4.0";
+  license: "CC0-1.0" | "PDM-1.0" | "CC-BY-3.0" | "CC-BY-4.0" | "CC-BY-SA-3.0" | "CC-BY-SA-4.0";
 }
