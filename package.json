@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "validate": "node --experimental-strip-types scripts/validate.ts",
+    "trace": "node --experimental-strip-types scripts/trace.ts",
     "build": "node --experimental-strip-types scripts/build.ts",
     "generate-bindings": "mkdir -p dist/bindings && json2ts schemas/media.schema.json -o dist/bindings/media.d.ts",
     "spellcheck": "cspell --no-progress --no-summary \"outlines/**/*.yml\" \"*.md\"",
@@ -25,7 +26,9 @@
     "@types/node": "24.19.2",
     "cspell": "10.4.0",
     "eslint": "10.13.0",
+    "esm-potrace-wasm": "0.5.1",
     "json-schema-to-typescript": "16.0.0",
+    "sharp": "0.35.5",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript-eslint": "8.72.1",
     "typescript7": "npm:typescript@7.0.2"

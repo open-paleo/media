@@ -51,9 +51,44 @@ export type Outline = {
     license: string;
 
     /**
+     * How the outline was traced from a skeletal reconstruction, or undefined if it wasn't.
+     */
+    trace: TraceSettings | undefined;
+
+    /**
      * The SVG file's text.
      */
     svg: string;
+};
+
+/**
+ * An outline's record, without its SVG file.
+ */
+export type OutlineRecord = Omit<Outline, "svg">;
+
+/**
+ * How an outline is traced from a skeletal reconstruction (see scripts/trace.ts).
+ */
+export type TraceSettings = {
+    /**
+     * The address of the full-size image file.
+     */
+    image: string;
+
+    /**
+     * The image file's SHA-1, in hex.
+     */
+    sha1: string;
+
+    /**
+     * How dark a pixel must be to count as part of the drawing, from 0 (black) to 255 (white).
+     */
+    threshold: number;
+
+    /**
+     * Points, in the image's own pixels, inside spaces that must stay open.
+     */
+    keepOpen: Array<[number, number]>;
 };
 
 /**
@@ -79,8 +114,12 @@ const outlinesDirectory = path.join(rootDirectory, "outlines");
 // same license. Non-commercial ones are not.
 export const allowedLicenses = new Set(["CC0-1.0", "PDM-1.0", "CC-BY-3.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC-BY-SA-4.0"]);
 
-// The fields an outline record may have.
-const outlineFields = new Set(["taxon", "title", "depicts", "creator", "source", "license", "mirrored"]);
+// The fields an outline record may have, and those of its trace block.
+const outlineFields = new Set(["taxon", "title", "depicts", "creator", "source", "license", "mirrored", "trace"]);
+const traceFields = new Set(["image", "sha1", "threshold", "keep_open"]);
+
+// The threshold a trace uses unless its record gives another.
+export const defaultTraceThreshold = 180;
 
 // The largest SVG file accepted, in bytes; outlines are simple shapes.
 const maximumSvgBytes = 200_000;
@@ -147,16 +186,89 @@ function checkSvg(svg: string, file: string, problems: Array<string>): void
 }
 
 /**
- * Read one outline's record and SVG file.
+ * Check whether a value is a point: two whole numbers, zero or more.
+ *
+ * @param value - The value.
+ * @returns Whether it is.
+ */
+function isPoint(value: unknown): value is [number, number]
+{
+    return Array.isArray(value) && value.length === 2 && Number.isInteger(value[0]) && Number.isInteger(value[1]) && value[0] >= 0 && value[1] >= 0;
+}
+
+/**
+ * Read a record's trace block.
+ *
+ * @param value - The block.
+ * @param recordFile - The record, for problems.
+ * @param problems - Where to add problems.
+ * @returns The settings, or undefined if the block cannot be used.
+ */
+function readTraceSettings(value: unknown, recordFile: string, problems: Array<string>): TraceSettings | undefined
+{
+    if (typeof value !== "object" || value === null || Array.isArray(value))
+    {
+        problems.push(recordFile + ": trace must be a mapping of fields");
+
+        return undefined;
+    }
+
+    const fields = value as Record<string, unknown>;
+
+    for (const field of Object.keys(fields))
+    {
+        if (!traceFields.has(field))
+        {
+            problems.push(recordFile + ": unknown trace field " + field);
+        }
+    }
+
+    const keepOpen = fields.keep_open ?? [];
+    const threshold = fields.threshold ?? defaultTraceThreshold;
+    let isUsable = true;
+
+    if (typeof fields.image !== "string" || !fields.image.startsWith("https://"))
+    {
+        problems.push(recordFile + ": trace needs the https:// address of the image file");
+        isUsable = false;
+    }
+
+    if (typeof fields.sha1 !== "string" || !/^[0-9a-f]{40}$/.test(fields.sha1))
+    {
+        problems.push(recordFile + ": trace needs the image file's SHA-1, 40 lowercase hex digits");
+        isUsable = false;
+    }
+
+    if (!Number.isInteger(threshold) || (threshold as number) < 1 || (threshold as number) > 254)
+    {
+        problems.push(recordFile + ": the trace threshold must be a whole number from 1 to 254");
+        isUsable = false;
+    }
+
+    if (!Array.isArray(keepOpen) || !keepOpen.every(isPoint))
+    {
+        problems.push(recordFile + ": keep_open must be a list of points, each [x, y] in the image's pixels");
+        isUsable = false;
+    }
+
+    if (!isUsable)
+    {
+        return undefined;
+    }
+
+    return { image: fields.image as string, sha1: fields.sha1 as string, threshold: threshold as number, keepOpen: keepOpen as Array<[number, number]> };
+}
+
+/**
+ * Read one outline's record.
  *
  * @param id - The outline's path under outlines/ without its extension, such as "t/titanosauria".
  * @param problems - Where to add problems.
- * @returns The outline, or undefined if its files cannot be used.
+ * @returns The record, or undefined if it cannot be used.
  */
-function readOutline(id: string, problems: Array<string>): Outline | undefined
+export function readOutlineRecord(id: string, problems: Array<string>): OutlineRecord | undefined
 {
     const recordFile = "outlines/" + id + ".yml";
-    const svgFile = "outlines/" + id + ".svg";
     let data: unknown;
 
     try
@@ -209,16 +321,12 @@ function readOutline(id: string, problems: Array<string>): Outline | undefined
         problems.push(recordFile + ": the source must be an https:// address");
     }
 
-    if (!fs.existsSync(path.join(rootDirectory, svgFile)))
-    {
-        problems.push(recordFile + ": has no " + svgFile);
+    const trace = fields.trace === undefined ? undefined : readTraceSettings(fields.trace, recordFile, problems);
 
+    if (fields.trace !== undefined && !trace)
+    {
         return undefined;
     }
-
-    const svg = fs.readFileSync(path.join(rootDirectory, svgFile), "utf8");
-
-    checkSvg(svg, svgFile, problems);
 
     return {
         id,
@@ -229,8 +337,39 @@ function readOutline(id: string, problems: Array<string>): Outline | undefined
         creator: fields.creator,
         source: fields.source,
         license: fields.license,
-        svg,
+        trace,
     };
+}
+
+/**
+ * Read one outline's record and SVG file.
+ *
+ * @param id - The outline's path under outlines/ without its extension, such as "t/titanosauria".
+ * @param problems - Where to add problems.
+ * @returns The outline, or undefined if its files cannot be used.
+ */
+function readOutline(id: string, problems: Array<string>): Outline | undefined
+{
+    const record = readOutlineRecord(id, problems);
+    const svgFile = "outlines/" + id + ".svg";
+
+    if (!record)
+    {
+        return undefined;
+    }
+
+    if (!fs.existsSync(path.join(rootDirectory, svgFile)))
+    {
+        problems.push("outlines/" + id + ".yml: has no " + svgFile + (record.trace ? "; run npm run trace" : ""));
+
+        return undefined;
+    }
+
+    const svg = fs.readFileSync(path.join(rootDirectory, svgFile), "utf8");
+
+    checkSvg(svg, svgFile, problems);
+
+    return { ...record, svg };
 }
 
 /**
@@ -240,7 +379,7 @@ function readOutline(id: string, problems: Array<string>): Outline | undefined
  * @returns The paths of the records and of the SVG files, under outlines/ and without their
  * extensions.
  */
-function findOutlineFiles(problems: Array<string>): [Set<string>, Set<string>]
+export function findOutlineFiles(problems: Array<string>): [Set<string>, Set<string>]
 {
     const recordIds = new Set<string>();
     const svgIds = new Set<string>();

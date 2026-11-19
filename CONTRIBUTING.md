@@ -16,13 +16,22 @@ Extracted text can be checked against the paper it came from; a life reconstruct
 outline, is interpretive work by an artist, and there is no source to check it against. The rule
 covers outlines too.
 
+Tracing an artist's skeletal reconstruction into an outline is allowed, because it adds nothing
+the artist didn't draw: `scripts/trace.ts` thresholds the image, removes the rest of the figure,
+fills the body and fits curves to its edge with [potrace](https://potrace.sourceforge.net), with no
+generative model at any step. Its settings are recorded with the outline, so anyone can rerun it
+and get the same file. A traced outline is never retouched by hand, and the enlarged copy of the
+image the script traces from is never published.
+
 - **The image must be openly licensed:** your own work, which you license under CC BY 4.0 by
   submitting it, or someone else's under CC0 1.0, the Public Domain Mark, CC BY 3.0 or 4.0, or
   CC BY-SA 3.0 or 4.0. A share-alike image's cleaned copy keeps its license. Licenses that forbid
   commercial use are not accepted, since they would set conditions on the site and on everyone
   reusing the images.
 - **No watermarked or heavily manipulated images.** Specimen photos should be unmodified. Life
-  reconstructions should be clearly labeled as such.
+  reconstructions should be clearly labeled as such. A traced outline is the one change allowed
+  beyond recoloring and flipping, and only as described in
+  [Tracing a skeletal reconstruction](#tracing-a-skeletal-reconstruction).
 - **Credit the creator.** Every image names its photographer, artist, or institution accurately,
   and links to where it came from.
 - **One image per pull request,** so each can be checked on its own.
@@ -65,11 +74,54 @@ its own colors, and flips it if the record asks; don't edit the file itself. The
 these changes ("Recolored; flipped horizontally"), since CC BY asks that credit lines say what
 was changed.
 
+## Tracing a skeletal reconstruction
+
+Many genera have a skeletal reconstruction on [Wikimedia Commons](https://commons.wikimedia.org)
+under an allowed license: the artist's drawing of the bones over the body's outline, in side
+view. Tracing one gives a more accurate outline than most silhouettes. Pick a figure whose
+body is drawn solid black behind the bones; one drawn as bones alone has no outline to trace.
+
+Instead of saving an SVG, add the record with a `trace` block, then run `npm run trace` to write
+the SVG beside it:
+
+```yaml
+taxon: Protoceratops
+title: Outline of Protoceratops
+depicts: Protoceratops andrewsi
+creator: Scott Hartman
+source: https://commons.wikimedia.org/wiki/File:Protoceratops_andrewsi_skeletal.png
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/…/Protoceratops_andrewsi_skeletal.png
+  sha1: 0123456789abcdef0123456789abcdef01234567
+  keep_open:
+    - [916, 596]
+```
+
+`source` is the file's Commons page, which names the artist and license; `creator` is the artist
+it names, not the uploader.
+
+| Field | What it holds |
+|---|---|
+| `image` | The `https://` address of the full-size image file. |
+| `sha1` | The file's SHA-1, as its Commons page gives it. The script refuses a file that doesn't match, so a later upload over the same name can't change the outline unnoticed. |
+| `threshold` | Optional, 180 by default: how dark, from 0 (black) to 255 (white), a pixel must be to count as part of the drawing. Lower it if a gray background is traced; raise it if thin lines break up. |
+| `keep_open` | Optional: points, in the image's own pixels, inside spaces that must stay open. Use one where overlapping legs close off the space beneath the body, which the script would otherwise fill. |
+
+The script keeps the largest shape and anything within a few pixels of it, such as teeth, and
+drops the rest: names, scale bars, human figures, grids and smaller drawings. It erases ground
+lines but keeps the feet that stand on them, and fills everything the body's outline encloses,
+including bones and claws drawn as white. Check the traced SVG against the figure before opening
+a pull request, and if something is wrong, change the settings rather than the SVG.
+
+The output notes what was changed: "Traced; rest of the figure removed; filled; recolored".
+
 ## Checks
 
 ```
 npm ci
 npm run validate      # the records and SVG files
+npm run trace         # traces the outlines with a trace block; -- --check compares instead
 npm run spellcheck    # the records and the docs
 npm run build         # writes dist/media.json and dist/outlines/
 npm run lint
@@ -78,7 +130,7 @@ npm run typecheck
 
 `validate` checks that each SVG has a record and each record an SVG, that records have every field
 and no others, that each file is in the folder of its first letter, that the license is one
-allowed, that no taxon has two outlines, and that each SVG
+allowed, that no taxon has two outlines, that each `trace` block is complete, and that each SVG
 is safe to put in a page. Add words the spell check doesn't know, such as clade names, to
 `dictionaries/words.txt`.
 

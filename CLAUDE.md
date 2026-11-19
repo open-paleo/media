@@ -3,8 +3,11 @@
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before adding an image or changing a script: it gives the
 image requirements, the outline record, and the code style.
 
-- **Never generate, draw, trace or upscale an image.** AI-generated or AI-assisted art is not
-  accepted. Images come from their creators, with their license and credit recorded
+- **Never generate, draw or upscale an image, or retouch one by hand.** AI-generated or
+  AI-assisted art is not accepted. Images come from their creators, with their license and
+  credit recorded. The one exception is tracing a skeletal reconstruction with
+  `scripts/trace.ts` and the settings in the outline's `trace` block, as CONTRIBUTING.md
+  describes; never edit a traced SVG, change its settings instead
 - **Only CC0 1.0, the Public Domain Mark, CC BY 3.0 or 4.0 and CC BY-SA 3.0 or 4.0 images;**
   never non-commercial ones. Check the license on the source page, and record the creator and the
   source address exactly as the source gives them

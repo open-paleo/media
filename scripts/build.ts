@@ -1,6 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 
+import type { Outline } from "./media-source.ts";
 import { readMediaSource, rootDirectory } from "./media-source.ts";
 
 // Builds dist/media.json and the cleaned outlines in dist/outlines/, and copies the schema they
@@ -119,6 +120,31 @@ function mirrorSvg(svg: string): string
 }
 
 /**
+ * Describe what the build, and a trace, changed from the source image, for its credit line.
+ *
+ * @param outline - The outline.
+ * @returns The changes, such as "Recolored; flipped horizontally".
+ */
+function describeChanges(outline: Outline): string
+{
+    const changes = new Array<string>();
+
+    if (outline.trace)
+    {
+        changes.push("Traced", "rest of the figure removed", "filled");
+    }
+
+    changes.push(outline.trace ? "recolored" : "Recolored");
+
+    if (outline.isMirrored)
+    {
+        changes.push("flipped horizontally");
+    }
+
+    return changes.join("; ");
+}
+
+/**
  * Clean an outline for use in a page: drop the XML prolog, comments, metadata and fixed size,
  * and draw it in the page's text color rather than black, so it follows the site's theme.
  *
@@ -176,7 +202,7 @@ for (const outline of source.outlines)
         file,
         title: outline.title,
         depicts: outline.depicts,
-        changes: outline.isMirrored ? "Recolored; flipped horizontally" : "Recolored",
+        changes: describeChanges(outline),
         creator: outline.creator,
         source: outline.source,
         license: outline.license,
