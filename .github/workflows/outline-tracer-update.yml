@@ -1,0 +1,109 @@
+name: Update the outline tracer
+
+# When the outline tracer in open-paleo/tools publishes a release, it sends an
+# outline-tracer-released notification with client_payload { version, tag, tarball_url,
+# integrity }, to this repository and to open-paleo/web. This workflow pins the new release,
+# checks the tarball is the one announced, retraces the traced outlines with it, and opens a pull
+# request saying whether any of them would change. Merge it together with open-paleo/web's, so
+# the site's tool page previews with the same release.
+#
+# The branch is pushed and the pull request opened with MEDIA_DISPATCH_TOKEN, the fine-grained
+# token open-paleo/tools sends the notification with (Contents and Pull requests: read and write
+# on this repository). A pull request opened with GitHub's built-in token would leave its checks
+# waiting for a maintainer's approval. The token is used only in the last step: the checkout
+# keeps no credentials, so the release's install scripts cannot read it.
+#
+# The payload is read through environment variables and checked before use, never pasted into
+# a command, so a malformed notification cannot inject one.
+on:
+  repository_dispatch:
+    types: [outline-tracer-released]
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Pin the release
+        env:
+          VERSION: ${{ github.event.client_payload.version }}
+          TARBALL_URL: ${{ github.event.client_payload.tarball_url }}
+          INTEGRITY: ${{ github.event.client_payload.integrity }}
+        run: |
+          if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$'; then
+            echo "Not a version: $VERSION" >&2
+            exit 1
+          fi
+          case "$TARBALL_URL" in
+            "https://github.com/open-paleo/tools/releases/download/outline-tracer-v"*) ;;
+            *) echo "Not an outline-tracer release asset: $TARBALL_URL" >&2; exit 1 ;;
+          esac
+          npm install --save-exact --save-dev "$TARBALL_URL"
+          locked=$(node -p 'require("./package-lock.json").packages["node_modules/@open-paleo/outline-tracer"].integrity')
+          if [ -n "$INTEGRITY" ] && [ "$locked" != "$INTEGRITY" ]; then
+            echo "The downloaded tarball's integrity ($locked) is not the one the release announced ($INTEGRITY)" >&2
+            exit 1
+          fi
+
+      # A release may trace some figures differently. That doesn't stop the pull request: it says
+      # which outlines changed, so they can be retraced and checked in it.
+      - name: Retrace the traced outlines
+        id: retrace
+        run: |
+          if npm run trace -- --check > trace-check.txt 2>&1; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+          cat trace-check.txt
+
+      - name: Open a pull request
+        env:
+          GH_TOKEN: ${{ secrets.MEDIA_DISPATCH_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          VERSION: ${{ github.event.client_payload.version }}
+          TAG: ${{ github.event.client_payload.tag }}
+          CHANGED: ${{ steps.retrace.outputs.changed }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          branch="outline-tracer-$VERSION"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add package.json package-lock.json
+          git commit -m "Update the outline tracer to $VERSION"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}.git" "$branch"
+          {
+            echo "Pins @open-paleo/outline-tracer $VERSION ([release notes](https://github.com/open-paleo/tools/releases/tag/$TAG)), with the tarball's integrity checked against the release, in [this run]($RUN_URL)."
+            echo
+            if [ "$CHANGED" = "true" ]; then
+              echo "**Some traced outlines change with this release**, or could not be retraced:"
+              echo
+              echo '```'
+              grep -E "differs|Could not|has SHA-1|no such|problem" trace-check.txt || tail -20 trace-check.txt
+              echo '```'
+              echo
+              echo "Run \`npm run trace\` on this branch, check each changed outline against its figure, and commit them here."
+            else
+              echo "Every traced outline traces to the same file with this release."
+            fi
+            echo
+            echo "open-paleo/web gets the same pull request for its tool page; merge both, so the page's preview matches what this repository traces."
+          } > pull-request-body.md
+          gh pr create --base main --head "$branch" --title "Update the outline tracer to $VERSION" --body-file pull-request-body.md

@@ -135,6 +135,16 @@ allowed, that no taxon has two outlines, that each `trace` block is complete, an
 is safe to put in a page. Add words the spell check doesn't know, such as clade names, to
 `dictionaries/words.txt`.
 
+## Updating the outline tracer
+
+`npm run trace` uses a pinned release of the
+[outline tracer](https://github.com/open-paleo/tools/tree/main/outline-tracer). When it publishes a
+release, `.github/workflows/outline-tracer-update.yml` pins it, retraces every traced outline,
+and opens a pull request saying whether any of them change. If some do, run `npm run trace` on
+that branch, check each changed outline against its figure, and commit them there. The workflow
+uses `MEDIA_DISPATCH_TOKEN`, a fine-grained token with Contents and Pull requests: read and write
+on this repository, also stored in open-paleo/tools to send the notification.
+
 ## Changing the output
 
 `schemas/media.schema.json` describes `dist/media.json`, and its `schema_version` constant is the
