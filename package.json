@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "@open-paleo/outline-tracer": "https://github.com/open-paleo/tools/releases/download/outline-tracer-v0.1.0/open-paleo-outline-tracer-0.1.0.tgz",
+    "@open-paleo/outline-tracer": "https://github.com/open-paleo/tools/releases/download/outline-tracer-v0.2.0/open-paleo-outline-tracer-0.2.0.tgz",
     "@stylistic/eslint-plugin": "5.10.0",
     "@types/node": "24.19.2",
     "cspell": "10.4.0",
