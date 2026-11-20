@@ -17,9 +17,10 @@ outline, is interpretive work by an artist, and there is no source to check it a
 covers outlines too.
 
 Tracing an artist's skeletal reconstruction into an outline is allowed, because it adds nothing
-the artist didn't draw: `scripts/trace.ts` thresholds the image, removes the rest of the figure,
-fills the body and fits curves to its edge with [potrace](https://potrace.sourceforge.net), with no
-generative model at any step. Its settings are recorded with the outline, so anyone can rerun it
+the artist didn't draw: `npm run trace`, with the
+[outline tracer](https://github.com/open-paleo/tools/tree/main/outline-tracer), thresholds the
+image, removes the rest of the figure, fills the body and fits curves to its edge with
+[potrace](https://potrace.sourceforge.net), with no generative model at any step. Its settings are recorded with the outline, so anyone can rerun it
 and get the same file. A traced outline is never retouched by hand, and the enlarged copy of the
 image the script traces from is never published.
 

@@ -6,9 +6,9 @@ import sharp from "sharp";
 
 import type { OutlineRecord, TraceSettings } from "./media-source.ts";
 import { findOutlineFiles, readOutlineRecord, rootDirectory } from "./media-source.ts";
-import type { RgbaImage, TraceReport } from "./trace/outline-tracer.ts";
-import { traceOutline } from "./trace/outline-tracer.ts";
-import { potraceTracer } from "./trace/potrace.ts";
+import type { BitmapTracer, RgbaImage, TraceReport } from "@open-paleo/outline-tracer";
+import { traceOutline } from "@open-paleo/outline-tracer";
+import { loadNodeTracer } from "@open-paleo/outline-tracer/node";
 
 // Traces the outlines whose records have a trace block, writing each SVG beside its record.
 //
@@ -185,6 +185,7 @@ async function runTrace(): Promise<void>
     const names = process.argv.slice(2).filter((argument) => argument !== "--check");
     const problems = new Array<string>();
     const records = findTracedRecords(names, problems);
+    const tracer: BitmapTracer = await loadNodeTracer();
     let differing = 0;
 
     for (const record of records)
@@ -192,7 +193,7 @@ async function runTrace(): Promise<void>
         const trace = record.trace as TraceSettings;
         const svgFile = path.join(rootDirectory, "outlines", record.id + ".svg");
         const image = await decodeImage(await readTraceImage(trace));
-        const result = await traceOutline(image, { threshold: trace.threshold, keepOpen: trace.keepOpen }, potraceTracer);
+        const result = await traceOutline(image, { threshold: trace.threshold, keepOpen: trace.keepOpen }, tracer);
 
         console.log(record.id + ": " + describeReport(result.report));
 
