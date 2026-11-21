@@ -89,6 +89,32 @@ export type TraceSettings = {
      * Points, in the image's own pixels, inside spaces that must stay open.
      */
     keepOpen: Array<[number, number]>;
+
+    /**
+     * A point, in the image's own pixels, on the animal to trace when the figure shows several.
+     */
+    select: [number, number] | undefined;
+
+    /**
+     * Rectangles to blank out before tracing, in the image's own pixels as [left, top, right, bottom].
+     */
+    erase: Array<[number, number, number, number]>;
+
+    /**
+     * Brush strokes to blank out before tracing, in the image's own pixels as [x1, y1, x2, y2, width].
+     */
+    eraseLines: Array<[number, number, number, number, number]>;
+
+    /**
+     * Points, in the image's own pixels, inside spaces that must be filled.
+     */
+    fill: Array<[number, number]>;
+
+    /**
+     * How wide a gap in the outline to close before filling, in pixels of an 800 px wide figure;
+     * the tracer's own unless given.
+     */
+    close: number | undefined;
 };
 
 /**
@@ -112,11 +138,11 @@ const outlinesDirectory = path.join(rootDirectory, "outlines");
 
 // The licenses an image may carry. Share-alike images are allowed: the cleaned copy keeps the
 // same license. Non-commercial ones are not.
-export const allowedLicenses = new Set(["CC0-1.0", "PDM-1.0", "CC-BY-3.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC-BY-SA-4.0"]);
+export const allowedLicenses = new Set(["CC0-1.0", "PDM-1.0", "CC-BY-2.0", "CC-BY-3.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC-BY-SA-4.0"]);
 
 // The fields an outline record may have, and those of its trace block.
 const outlineFields = new Set(["taxon", "title", "depicts", "creator", "source", "license", "mirrored", "trace"]);
-const traceFields = new Set(["image", "sha1", "threshold", "keep_open"]);
+const traceFields = new Set(["image", "sha1", "threshold", "keep_open", "select", "erase", "erase_lines", "fill", "close"]);
 
 // The threshold a trace uses unless its record gives another.
 export const defaultTraceThreshold = 180;
@@ -197,6 +223,31 @@ function isPoint(value: unknown): value is [number, number]
 }
 
 /**
+ * Report whether a value is a rectangle: [left, top, right, bottom], whole numbers from 0, with
+ * right past left and bottom past top.
+ *
+ * @param value - The value.
+ * @returns Whether it is a rectangle.
+ */
+function isRectangle(value: unknown): value is [number, number, number, number]
+{
+    return Array.isArray(value) && value.length === 4 && value.every((part) => Number.isInteger(part) && part >= 0)
+        && value[2] > value[0] && value[3] > value[1];
+}
+
+/**
+ * Report whether a value is a brush stroke: [x1, y1, x2, y2, width], whole numbers from 0, with a
+ * width of at least 1.
+ *
+ * @param value - The value.
+ * @returns Whether it is a stroke.
+ */
+function isStroke(value: unknown): value is [number, number, number, number, number]
+{
+    return Array.isArray(value) && value.length === 5 && value.every((part) => Number.isInteger(part) && part >= 0) && value[4] >= 1;
+}
+
+/**
  * Read a record's trace block.
  *
  * @param value - The block.
@@ -224,6 +275,9 @@ function readTraceSettings(value: unknown, recordFile: string, problems: Array<s
     }
 
     const keepOpen = fields.keep_open ?? [];
+    const erase = fields.erase ?? [];
+    const eraseLines = fields.erase_lines ?? [];
+    const fill = fields.fill ?? [];
     const threshold = fields.threshold ?? defaultTraceThreshold;
     let isUsable = true;
 
@@ -251,12 +305,52 @@ function readTraceSettings(value: unknown, recordFile: string, problems: Array<s
         isUsable = false;
     }
 
+    if (fields.select !== undefined && !isPoint(fields.select))
+    {
+        problems.push(recordFile + ": select must be a point, [x, y] in the image's pixels");
+        isUsable = false;
+    }
+
+    if (!Array.isArray(erase) || !erase.every(isRectangle))
+    {
+        problems.push(recordFile + ": erase must be a list of rectangles, each [left, top, right, bottom] in the image's pixels");
+        isUsable = false;
+    }
+
+    if (!Array.isArray(eraseLines) || !eraseLines.every(isStroke))
+    {
+        problems.push(recordFile + ": erase_lines must be a list of strokes, each [x1, y1, x2, y2, width] in the image's pixels");
+        isUsable = false;
+    }
+
+    if (!Array.isArray(fill) || !fill.every(isPoint))
+    {
+        problems.push(recordFile + ": fill must be a list of points, each [x, y] in the image's pixels");
+        isUsable = false;
+    }
+
+    if (fields.close !== undefined && (typeof fields.close !== "number" || fields.close <= 0 || fields.close > 10))
+    {
+        problems.push(recordFile + ": close must be a number above 0 and at most 10");
+        isUsable = false;
+    }
+
     if (!isUsable)
     {
         return undefined;
     }
 
-    return { image: fields.image as string, sha1: fields.sha1 as string, threshold: threshold as number, keepOpen: keepOpen as Array<[number, number]> };
+    return {
+        image: fields.image as string,
+        sha1: fields.sha1 as string,
+        threshold: threshold as number,
+        keepOpen: keepOpen as Array<[number, number]>,
+        select: fields.select as [number, number] | undefined,
+        erase: erase as Array<[number, number, number, number]>,
+        eraseLines: eraseLines as Array<[number, number, number, number, number]>,
+        fill: fill as Array<[number, number]>,
+        close: fields.close as number | undefined,
+    };
 }
 
 /**

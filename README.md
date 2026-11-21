@@ -51,7 +51,7 @@ classification changes.
 ## License
 
 **Each image keeps the license it came with,** recorded in its YAML file: CC0 1.0, the Public
-Domain Mark, CC BY 3.0 or 4.0, or CC BY-SA 3.0 or 4.0; none forbids commercial use. Anyone using
+Domain Mark, CC BY 2.0, 3.0 or 4.0, or CC BY-SA 3.0 or 4.0; none forbids commercial use. Anyone using
 an image must credit its creator as its license requires, noting the changes the output lists;
 the record gives the creator and the source. Images contributed as original work, the records, the scripts and
 the docs are licensed under [CC BY 4.0](LICENSE); credit "Open Paleo contributors".

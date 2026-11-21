@@ -22,6 +22,25 @@ const userAgent = "open-paleo-media/1.0 (https://github.com/open-paleo/media)";
 // Downloaded images, by SHA-1, so a retrace doesn't fetch them again.
 const cacheDirectory = path.join(rootDirectory, "scratch", "trace-images");
 
+// SVG figures are rasterized at this width to trace them, as wide as the tracer works.
+const svgWidth = 2400;
+
+/**
+ * A figure ready to trace.
+ */
+type DecodedFigure = {
+    /**
+     * Its pixels.
+     */
+    image: RgbaImage;
+
+    /**
+     * Pixels per unit of the figure's own size: 1 for a raster image, more for an SVG rasterized
+     * larger than its own size. A record's points are in the figure's own units.
+     */
+    unitScale: number;
+};
+
 // The wait between downloads, and the most attempts at one, in milliseconds and tries.
 const downloadPause = 2000;
 const downloadAttempts = 5;
@@ -100,16 +119,33 @@ async function readTraceImage(trace: TraceSettings): Promise<Buffer>
 }
 
 /**
- * Decode an image file into pixels.
+ * Decode an image file into pixels, rasterizing an SVG at the width the tracer works at.
  *
  * @param bytes - The file's contents.
- * @returns The pixels.
+ * @returns The pixels, and how they relate to the figure's own units.
  */
-async function decodeImage(bytes: Buffer): Promise<RgbaImage>
+async function decodeImage(bytes: Buffer): Promise<DecodedFigure>
 {
-    const { data, info } = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    // An SVG's own size can be far over sharp's pixel limit even though it is rasterized at a fixed
+    // width, so the limit is lifted for SVGs alone.
+    const metadata = await sharp(bytes, { limitInputPixels: false }).metadata();
+    const isSvg = metadata.format === "svg";
+    const decoder = isSvg ? sharp(bytes, { density: 72 * svgWidth / (metadata.width ?? svgWidth), limitInputPixels: false }) : sharp(bytes);
+    const { data, info } = await decoder.ensureAlpha().raw().toBuffer({ resolveWithObject: true });
 
-    return { width: info.width, height: info.height, data };
+    return { image: { width: info.width, height: info.height, data }, unitScale: isSvg ? info.width / (metadata.width ?? info.width) : 1 };
+}
+
+/**
+ * Scale a point from the figure's own units to the decoded pixels.
+ *
+ * @param point - The point.
+ * @param scale - Pixels per unit.
+ * @returns The scaled point.
+ */
+function scalePoint(point: [number, number], scale: number): [number, number]
+{
+    return [point[0] * scale, point[1] * scale];
 }
 
 /**
@@ -122,13 +158,23 @@ function describeReport(report: TraceReport): string
 {
     const parts = [
         report.shapesKept + " shapes kept, " + report.shapesDropped + " dropped",
-        report.linesErased + " ground lines erased",
+        report.linesErased + " lines erased",
         report.cavitiesFilled + " cavities filled",
     ];
 
     for (const [x, y] of report.keepOpenMissed)
     {
         parts.push("keep-open point [" + x + ", " + y + "] is on the drawing, not in an open space");
+    }
+
+    for (const [x, y] of report.fillMissed)
+    {
+        parts.push("fill point [" + x + ", " + y + "] did nothing: on the drawing, or in a space too open");
+    }
+
+    if (report.selectMissed)
+    {
+        parts.push("the select point is far from any drawing, so the largest animal was kept");
     }
 
     return parts.join("; ");
@@ -192,8 +238,44 @@ async function runTrace(): Promise<void>
     {
         const trace = record.trace as TraceSettings;
         const svgFile = path.join(rootDirectory, "outlines", record.id + ".svg");
-        const image = await decodeImage(await readTraceImage(trace));
-        const result = await traceOutline(image, { threshold: trace.threshold, keepOpen: trace.keepOpen }, tracer);
+        const figure = await decodeImage(await readTraceImage(trace));
+        const keepOpen = new Array<[number, number]>();
+
+        for (const point of trace.keepOpen)
+        {
+            keepOpen.push(scalePoint(point, figure.unitScale));
+        }
+
+        const fill = new Array<[number, number]>();
+
+        for (const point of trace.fill)
+        {
+            fill.push(scalePoint(point, figure.unitScale));
+        }
+
+        const erase = new Array<[number, number, number, number]>();
+
+        for (const [left, top, right, bottom] of trace.erase)
+        {
+            const [scaledLeft, scaledTop] = scalePoint([left, top], figure.unitScale);
+            const [scaledRight, scaledBottom] = scalePoint([right, bottom], figure.unitScale);
+
+            erase.push([scaledLeft, scaledTop, scaledRight, scaledBottom]);
+        }
+
+        const eraseLines = new Array<[number, number, number, number, number]>();
+
+        for (const [x1, y1, x2, y2, width] of trace.eraseLines)
+        {
+            const [scaledX1, scaledY1] = scalePoint([x1, y1], figure.unitScale);
+            const [scaledX2, scaledY2] = scalePoint([x2, y2], figure.unitScale);
+
+            eraseLines.push([scaledX1, scaledY1, scaledX2, scaledY2, width * figure.unitScale]);
+        }
+
+        const select = trace.select ? scalePoint(trace.select, figure.unitScale) : undefined;
+        const options = { threshold: trace.threshold, keepOpen, select, erase, eraseLines, fill, close: trace.close };
+        const result = await traceOutline(figure.image, options, tracer);
 
         console.log(record.id + ": " + describeReport(result.report));
 

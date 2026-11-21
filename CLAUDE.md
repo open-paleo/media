@@ -8,7 +8,7 @@ image requirements, the outline record, and the code style.
   credit recorded. The one exception is tracing a skeletal reconstruction with
   `scripts/trace.ts` and the settings in the outline's `trace` block, as CONTRIBUTING.md
   describes; never edit a traced SVG, change its settings instead
-- **Only CC0 1.0, the Public Domain Mark, CC BY 3.0 or 4.0 and CC BY-SA 3.0 or 4.0 images;**
+- **Only CC0 1.0, the Public Domain Mark, CC BY 2.0, 3.0 or 4.0 and CC BY-SA 3.0 or 4.0 images;**
   never non-commercial ones. Check the license on the source page, and record the creator and the
   source address exactly as the source gives them
 - Don't edit an outline's file; the build handles its size and colors, and flips it when the

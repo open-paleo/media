@@ -25,8 +25,8 @@ and get the same file. A traced outline is never retouched by hand, and the enla
 image the script traces from is never published.
 
 - **The image must be openly licensed:** your own work, which you license under CC BY 4.0 by
-  submitting it, or someone else's under CC0 1.0, the Public Domain Mark, CC BY 3.0 or 4.0, or
-  CC BY-SA 3.0 or 4.0. A share-alike image's cleaned copy keeps its license. Licenses that forbid
+  submitting it, or someone else's under CC0 1.0, the Public Domain Mark, CC BY 2.0, 3.0 or 4.0,
+  or CC BY-SA 3.0 or 4.0. A share-alike image's cleaned copy keeps its license. Licenses that forbid
   commercial use are not accepted, since they would set conditions on the site and on everyone
   reusing the images.
 - **No watermarked or heavily manipulated images.** Specimen photos should be unmodified. Life
@@ -63,7 +63,7 @@ list their creator and license; take only those under the licenses above.
 | `depicts` | The taxon the outline was drawn from, as the source names it, so captions can say "based on…". |
 | `creator` | The artist, as the source credits them. |
 | `source` | The `https://` address the outline came from. |
-| `license` | `CC0-1.0`, `PDM-1.0`, `CC-BY-3.0`, `CC-BY-4.0`, `CC-BY-SA-3.0` or `CC-BY-SA-4.0`. |
+| `license` | `CC0-1.0`, `PDM-1.0`, `CC-BY-2.0`, `CC-BY-3.0`, `CC-BY-4.0`, `CC-BY-SA-3.0` or `CC-BY-SA-4.0`. |
 | `mirrored` | Optional: `true` to flip the outline horizontally in the build, when it faces right. |
 
 A genus shows its own outline if it has one, and otherwise that of the nearest clade above it
@@ -108,12 +108,24 @@ it names, not the uploader.
 | `sha1` | The file's SHA-1, as its Commons page gives it. The script refuses a file that doesn't match, so a later upload over the same name can't change the outline unnoticed. |
 | `threshold` | Optional, 180 by default: how dark, from 0 (black) to 255 (white), a pixel must be to count as part of the drawing. Lower it if a gray background is traced; raise it if thin lines break up. |
 | `keep_open` | Optional: points, in the image's own pixels, inside spaces that must stay open. Use one where overlapping legs close off the space beneath the body, which the script would otherwise fill. |
+| `select` | Optional: a point, in the image's own pixels, on the animal to trace, when the figure shows several. Without it the largest is traced. |
+| `erase` | Optional: rectangles to blank out before tracing, each `[left, top, right, bottom]`, such as a human figure touching the animal or a label over its tail. |
+| `erase_lines` | Optional: brush strokes to blank out before tracing, each `[x1, y1, x2, y2, width]`, for dots and pointer lines along the animal where a rectangle would take part of it too. A stroke needn't be exact: where it strays over the animal's edge, the edge is kept. |
+| `fill` | Optional: points inside spaces that must be filled, such as a jaw or toe whose outline opens too wide for the script to close by itself. |
+| `close` | Optional: how wide a gap in the outline to close before filling, in pixels of an 800 px wide figure (0.67 by default). Raise it a little when a skull or jaw stays open; too wide closes the spaces between legs. |
 
-The script keeps the largest shape and anything within a few pixels of it, such as teeth, and
-drops the rest: names, scale bars, human figures, grids and smaller drawings. It erases ground
-lines but keeps the feet that stand on them, and fills everything the body's outline encloses,
-including bones and claws drawn as white. Check the traced SVG against the figure before opening
-a pull request, and if something is wrong, change the settings rather than the SVG.
+Points are in the image's own pixels; for an SVG figure, in the SVG's own units. The script
+renders an SVG at 2400 pixels wide to trace it, and scales the points to match.
+
+The script takes the background color from the figure's top corners and leaves it out, so a gray
+or tinted background traces like a white one; a light but clearly colored animal still counts as
+drawing. It erases grid and frame lines, and ground lines but not the feet that stand on them.
+It keeps the largest shape (or the one `select` points to) and anything within a few pixels of
+it, such as teeth, and drops the rest: names, scale bars, human figures and smaller drawings. It
+fills everything the body's outline encloses, including bones and claws drawn as white, then
+removes call-outs: drawings of bones beside the animal, joined to it by thin lines. Check the
+traced SVG against the figure before opening a pull request, and if something is wrong, change
+the settings rather than the SVG.
 
 The output notes what was changed: "Traced; rest of the figure removed; filled; recolored".
 

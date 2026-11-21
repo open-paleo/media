@@ -3,6 +3,11 @@
 Changes to the media output, `dist/media.json`, newest first. Images added or replaced are not
 listed.
 
+## 1.3.0 (2026-11-21)
+
+- Outlines may be licensed CC BY 2.0 (`CC-BY-2.0`); the site needs its name and address for
+  credit lines
+
 ## 1.2.0 (2026-11-18)
 
 - Outlines may stand for a genus as well as a clade: `outlines` is keyed by either. A genus with
