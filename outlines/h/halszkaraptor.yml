@@ -1,0 +1,11 @@
+taxon: Halszkaraptor
+title: Outline of Halszkaraptor
+depicts: Halszkaraptor escuilliei
+creator: "Andrea Cau, Vincent Beyrand, Rinchen Barsbold, Khishigjav Tsogtbaatar & Pascal Godefroit"
+source: https://commons.wikimedia.org/wiki/File:Halszkaraptor_escuilliei_skeletal.png
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/f/f6/Halszkaraptor_escuilliei_skeletal.png
+  sha1: 6bd7c1aa5a2bd01885253471316803f924d5864a
+  erase:
+    - [682, 1152, 918, 1162]

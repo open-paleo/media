@@ -1,0 +1,11 @@
+taxon: Heterodontosaurus
+title: Outline of Heterodontosaurus
+depicts: Heterodontosaurus tucki
+creator: "Carol Abraczinskas, Paul C. Sereno"
+source: https://commons.wikimedia.org/wiki/File:Heterodontosaurus_tucki.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/0/02/Heterodontosaurus_tucki.jpg
+  sha1: d2a4d4496eb1a30edc66357496ce9da6fc34e4d8
+  keep_open:
+    - [304, 332]

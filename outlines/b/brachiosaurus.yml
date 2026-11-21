@@ -1,0 +1,12 @@
+taxon: Brachiosaurus
+title: Outline of Brachiosaurus
+depicts: Brachiosaurus altithorax
+creator: Gunnar Bivens
+source: https://commons.wikimedia.org/wiki/File:Brachiosaurus_altithorax_Mk_III_Multiview_Skeletal.png
+license: CC-BY-SA-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/1/16/Brachiosaurus_altithorax_Mk_III_Multiview_Skeletal.png
+  sha1: a10e441f4be27c98075d39c4b374b293639a148f
+  close: 1.5
+  select: [4671, 4788]

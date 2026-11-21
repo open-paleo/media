@@ -1,0 +1,10 @@
+taxon: Australotitan
+title: Outline of Australotitan
+depicts: Australotitan cooperensis
+creator: Sauriazoicillus
+source: https://commons.wikimedia.org/wiki/File:Australotitan_cooperensis.png
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/1/17/Australotitan_cooperensis.png
+  sha1: ac4802e1402d17bd0b98dda1a810862a30d691f2
+  select: [5420, 3775]

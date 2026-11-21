@@ -1,0 +1,12 @@
+taxon: Dreadnoughtus
+title: Outline of Dreadnoughtus
+depicts: Dreadnoughtus schrani
+creator: Gunnar Bivens
+source: https://commons.wikimedia.org/wiki/File:Dreadnoughtus_schrani_Multiview_Skeletal.png
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/c/c8/Dreadnoughtus_schrani_Multiview_Skeletal.png
+  sha1: 22e722332e998405df79d1d58f1ca043ad12de39
+  select: [8463, 4956]
+  erase:
+    - [13584, 73, 14779, 7637]

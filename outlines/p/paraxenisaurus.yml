@@ -1,0 +1,10 @@
+taxon: Paraxenisaurus
+title: Outline of Paraxenisaurus
+depicts: Paraxenisaurus normalensis
+creator: Daniel Barrera Guevara
+source: https://commons.wikimedia.org/wiki/File:Paraxenisaurus_skeleton.jpg
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/c/ca/Paraxenisaurus_skeleton.jpg
+  sha1: 02ed5814e81ba86853bf29224b69f4d338eb5757
+  select: [1443, 1924]

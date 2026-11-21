@@ -1,0 +1,10 @@
+taxon: Nigersaurus
+title: Outline of Nigersaurus
+depicts: Nigersaurus taqueti
+creator: Mike Hanson (Apatomerus)
+source: https://commons.wikimedia.org/wiki/File:Nigersaurus_taqueti_skeletal.png
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/7/75/Nigersaurus_taqueti_skeletal.png
+  sha1: ae2f9d86b6967064d23bb10e66b7e38e65bd8dec
+  select: [484, 337]

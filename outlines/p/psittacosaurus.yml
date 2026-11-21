@@ -1,0 +1,14 @@
+taxon: Psittacosaurus
+title: Outline of Psittacosaurus
+depicts: Psittacosaurus
+creator: "Jakob Vinther, Robert Nicholls, Stephan Lautenschlager, Michael Pittman, Thomas G. Kaye, Emily Rayfield, Gerald Mayr & Innes C. Cuthill"
+source: https://commons.wikimedia.org/wiki/File:Psittacosaurus_sp_skeletal.png
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/4/4d/Psittacosaurus_sp_skeletal.png
+  sha1: dc229f2d2c7b708452a9b185f80a64b1e63ab814
+  threshold: 100
+  select: [1423, 1272]
+  keep_open:
+    - [1633, 1456]
+    - [1621, 1449]

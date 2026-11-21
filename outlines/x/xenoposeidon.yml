@@ -1,0 +1,11 @@
+taxon: Xenoposeidon
+title: Outline of Xenoposeidon
+depicts: Xenoposeidon proneneukos
+creator: Slate Weasel
+source: https://commons.wikimedia.org/wiki/File:Xenoposeidon_Skeletal.svg
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/5/5e/Xenoposeidon_Skeletal.svg
+  sha1: 8320ab43e7acad58588fc76d0cd1063f9d363b88
+  keep_open:
+    - [4841, 2524]

@@ -1,0 +1,13 @@
+taxon: Leptoceratops
+title: Outline of Leptoceratops
+depicts: Leptoceratops gracilis
+creator: "Jaime A. Headden (User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Leptoceratops_gracilis_skeletal.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/6/65/Leptoceratops_gracilis_skeletal.jpg
+  sha1: 8bb3c15f2055620a5a7694f0db43a5b7a999a8cf
+  close: 1.5
+  fill:
+    - [310, 332]
+    - [319, 295]

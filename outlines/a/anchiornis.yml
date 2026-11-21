@@ -1,0 +1,11 @@
+taxon: Anchiornis
+title: Outline of Anchiornis
+depicts: Anchiornis huxleyi
+creator: "Wang X., Pittman, M., Zheng X., Kaye, T.G., Falk, A.R., Hartman, S.A., and Xu X."
+source: https://commons.wikimedia.org/wiki/File:Anchiornis_huxleyi_skel_hartman_2017.png
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/d/d4/Anchiornis_huxleyi_skel_hartman_2017.png
+  sha1: d528c1f511a272f752d7ae0ff83b94192fae8530
+  keep_open:
+    - [242, 319]

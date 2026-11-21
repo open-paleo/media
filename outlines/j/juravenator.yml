@@ -1,0 +1,13 @@
+taxon: Juravenator
+title: Outline of Juravenator
+depicts: Juravenator
+creator: "Jaime A. Headden (User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Juravenator.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/f/fe/Juravenator.jpg
+  sha1: 1556550607edf0c51504a885e1ecca3f56d942ad
+  threshold: 215
+  close: 2.5
+  fill:
+    - [48, 60]

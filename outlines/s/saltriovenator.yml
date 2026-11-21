@@ -1,0 +1,13 @@
+taxon: Saltriovenator
+title: Outline of Saltriovenator
+depicts: Saltriovenator
+creator: "Cristiano Dal Sasso, Simone Maganuco, Andrea Cau"
+source: https://commons.wikimedia.org/wiki/File:Saltriovenator_Skeletal_Diagram.png
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/c/c9/Saltriovenator_Skeletal_Diagram.png
+  sha1: 6a3d9c4d27009fd09ee87ad3cbda1618b1445825
+  threshold: 150
+  keep_open:
+    - [701, 337]

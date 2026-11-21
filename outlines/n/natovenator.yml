@@ -1,0 +1,12 @@
+taxon: Natovenator
+title: Outline of Natovenator
+depicts: Natovenator polydontus
+creator: "Sungjin Lee, Yuong-Nam Lee, Philip J. Currie, Robin Sissons, Jin-Young Park, Su-Hwan Kim, Rinchen Barsbold & Khishigjav Tsogtbaatar"
+source: https://commons.wikimedia.org/wiki/File:Natovenator_skeletal_(holotype).png
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/5/5b/Natovenator_skeletal_%28holotype%29.png
+  sha1: 955b57251b1a51311009eff55c8599bae2844fff
+  keep_open:
+    - [1271, 914]

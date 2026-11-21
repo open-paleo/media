@@ -1,0 +1,11 @@
+taxon: Pendraig
+title: Outline of Pendraig
+depicts: Pendraig milnerae
+creator: Maurissauro
+source: https://commons.wikimedia.org/wiki/File:Pendraig_milnerae_skeleton.png
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/c/c5/Pendraig_milnerae_skeleton.png
+  sha1: 808cef4ef2d6430f07204d02cd61d66cd6a4123c
+  keep_open:
+    - [2430, 1562]

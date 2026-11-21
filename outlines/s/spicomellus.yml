@@ -1,0 +1,10 @@
+taxon: Spicomellus
+title: Outline of Spicomellus
+depicts: Spicomellus afer
+creator: SlvrHwk
+source: https://commons.wikimedia.org/wiki/File:Spicomellus_Skeletal_(separate_skeleton_and_osteoderms).svg
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/4/44/Spicomellus_Skeletal_%28separate_skeleton_and_osteoderms%29.svg
+  sha1: 0fbfd0597701fd468b18c0d7101cb3b33afe4112
+  select: [268, 88]

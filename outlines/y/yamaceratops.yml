@@ -1,0 +1,11 @@
+taxon: Yamaceratops
+title: Outline of Yamaceratops
+depicts: Yamaceratops dorngobiensis
+creator: "Minyoung Son, Yuong-Nam Lee, Badamkhatan Zorigt, Yoshitsugu Kobayashi, Jin-Young Park, Sungjin Lee, Su-Hwan Kim & Kang Young Lee"
+source: https://commons.wikimedia.org/wiki/File:Skeletal_Yamaceratops_MPC-D_100_553_specimen.png
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/c/ca/Skeletal_Yamaceratops_MPC-D_100_553_specimen.png
+  sha1: d715d7661a24aba9db0daf5843948e87150698ea
+  select: [1014, 1170]

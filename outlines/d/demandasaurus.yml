@@ -1,0 +1,12 @@
+taxon: Demandasaurus
+title: Outline of Demandasaurus
+depicts: Demandasaurus darwini
+creator: Slate Weasel
+source: https://commons.wikimedia.org/wiki/File:Demandasaurus_Skeletal.svg
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/8/8e/Demandasaurus_Skeletal.svg
+  sha1: f024f61c47bf3f998ae90011fb6a798d21e6452f
+  keep_open:
+    - [6317, 2178]

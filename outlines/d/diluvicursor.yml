@@ -1,0 +1,19 @@
+taxon: Diluvicursor
+title: Outline of Diluvicursor
+depicts: Diluvicursor pickeringi
+creator: "Herne MC, Tait AM, Weisbecker V, Hall M, Nair JP, Cleeland M, Salisbury SW."
+source: https://commons.wikimedia.org/wiki/File:Diluvicursor_skeleton.png
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/4/43/Diluvicursor_skeleton.png
+  sha1: 4ef9af3cfef093bd1166c238b33d8456bf37c3a6
+  erase_lines:
+    - [1303, 1103, 1372, 1103, 132]
+    - [1372, 1103, 1438, 1100, 132]
+    - [1438, 1100, 1505, 1100, 132]
+    - [1505, 1100, 1527, 1036, 132]
+    - [1527, 1036, 1494, 978, 132]
+    - [1494, 978, 1561, 981, 132]
+    - [1561, 981, 1608, 1028, 132]
+    - [1696, 1217, 1751, 1256, 132]
+    - [1826, 1288, 1826, 1288, 132]

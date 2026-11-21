@@ -1,0 +1,12 @@
+taxon: Itapeuasaurus
+title: Outline of Itapeuasaurus
+depicts: Itapeuasaurus cajapioensis
+creator: Slate Weasel
+source: https://commons.wikimedia.org/wiki/File:Itapeuasaurus_Skeletal.svg
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/7/7e/Itapeuasaurus_Skeletal.svg
+  sha1: 4930f96bfab8b665852394cab7312fa9493b27a6
+  keep_open:
+    - [5037, 2024]

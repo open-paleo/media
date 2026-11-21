@@ -1,0 +1,24 @@
+taxon: Infernogallus
+title: Outline of Infernogallus
+depicts: Infernogallus jamesi
+creator: "G. F. Funston, T. W. Dudgeon, D. J. Simon, D. M. Dufault, C. Boyd, D. Fowler, P. J. Currie & D. C. Evans"
+source: https://commons.wikimedia.org/wiki/File:Infernogallus_jamesi_(holotype,_ROM_VP_65050).png
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/8/84/Infernogallus_jamesi_%28holotype%2C_ROM_VP_65050%29.png
+  sha1: 34a24ab518eed6319d13249eccb5c9a0ad1d5789
+  select: [718, 1091]
+  erase_lines:
+    - [721, 1170, 721, 1170, 40]
+    - [746, 1206, 737, 1188, 40]
+    - [737, 1188, 748, 1206, 40]
+    - [748, 1206, 762, 1221, 40]
+    - [809, 1249, 823, 1264, 40]
+    - [823, 1264, 835, 1280, 40]
+    - [835, 1280, 848, 1297, 40]
+    - [848, 1297, 862, 1314, 40]
+    - [862, 1314, 877, 1329, 40]
+    - [877, 1329, 893, 1345, 40]
+    - [893, 1345, 907, 1361, 40]
+    - [1000, 1106, 1000, 1106, 40]

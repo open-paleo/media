@@ -1,0 +1,10 @@
+taxon: Sinornithosaurus
+title: Outline of Sinornithosaurus
+depicts: Sinornithosaurus millenii
+creator: "Jaime A. Headden (User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Sinornithosaurus_millenii.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/3/31/Sinornithosaurus_millenii.jpg
+  sha1: c80577abff6248c7faf552689b85679ab5f2dac3
+  select: [403, 141]

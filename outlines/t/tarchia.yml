@@ -1,0 +1,10 @@
+taxon: Tarchia
+title: Outline of Tarchia
+depicts: Tarchia tumanovae
+creator: "Jin-Young Park, Yuong-Nam Lee, Yoshitsugu Kobayashi, Louis L. Jacobs, Rinchen Barsbold, Hang-Jae Lee, Namsoo Kim, Kyo-Young Song & Michael J. Polcyn"
+source: https://commons.wikimedia.org/wiki/File:Tarchia_tumanovae_holotype_skeletal.png
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/3/3f/Tarchia_tumanovae_holotype_skeletal.png
+  sha1: 00ad29eb2b76676aee6b5f6acab939a2fe2885c0
+  select: [396, 545]

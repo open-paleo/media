@@ -1,0 +1,10 @@
+taxon: Koreanosaurus
+title: Outline of Koreanosaurus
+depicts: Koreanosaurus boseongensis
+creator: PARK Jin-Young
+source: https://commons.wikimedia.org/wiki/File:Skeletal_diagram_of_Koreanosaurus_boseongensis.jpg
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/0/0e/Skeletal_diagram_of_Koreanosaurus_boseongensis.jpg
+  sha1: fc46fba31c48421e3fee1a5a8768aa5ecfa24ecb
+  select: [391, 653]

@@ -1,0 +1,17 @@
+taxon: Australodocus
+title: Outline of Australodocus
+depicts: Australodocus bohetii
+creator: Slate Weasel
+source: https://commons.wikimedia.org/wiki/File:Australodocus_Skeletal_V2.svg
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/9/94/Australodocus_Skeletal_V2.svg
+  sha1: 067789932aec1fd78d27be214e136c59cdd264d0
+  erase_lines:
+    - [3966, 2240, 4091, 2236, 248]
+    - [4091, 2236, 4202, 2172, 248]
+    - [4202, 2172, 4323, 2137, 248]
+    - [4323, 2137, 4221, 2208, 248]
+    - [4403, 2130, 4295, 2193, 248]
+    - [4295, 2193, 4200, 2275, 248]

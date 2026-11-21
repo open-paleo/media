@@ -1,0 +1,10 @@
+taxon: Microraptor
+title: Outline of Microraptor
+depicts: Microraptor
+creator: "Jaime A. Headden (User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Microraptor_Skeletons_by_Qilong.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/b/b9/Microraptor_Skeletons_by_Qilong.jpg
+  sha1: ad1fcc664a678dbb087ab2548b103c630e32ccd6
+  select: [416, 749]

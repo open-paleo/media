@@ -1,0 +1,12 @@
+taxon: Alamosaurus
+title: Outline of Alamosaurus
+depicts: Alamosaurus sanjuanensis
+creator: Alamotitan
+source: https://commons.wikimedia.org/wiki/File:Alamosaurus-sanjuanensis.jpg
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/8/81/Alamosaurus-sanjuanensis.jpg
+  sha1: 0896d1b612660ace3fda87bcafc4d0c39ab9c42d
+  keep_open:
+    - [1816, 1891]
+    - [502, 198]

@@ -1,0 +1,12 @@
+taxon: Katepensaurus
+title: Outline of Katepensaurus
+depicts: Katepensaurus goicoecheai
+creator: Slate Weasel
+source: https://commons.wikimedia.org/wiki/File:Katepensaurus_Skeletal.svg
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/0/0f/Katepensaurus_Skeletal.svg
+  sha1: c6ad34dd0b224451d3602b52642d2e5797cfe2d6
+  keep_open:
+    - [6319, 2178]

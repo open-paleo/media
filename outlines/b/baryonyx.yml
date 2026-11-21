@@ -1,0 +1,10 @@
+taxon: Baryonyx
+title: Outline of Baryonyx
+depicts: Baryonyx walkeri
+creator: "Jaime A. Headden (User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Suchomimus_and_Baryonyx.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/7/79/Suchomimus_and_Baryonyx.jpg
+  sha1: 954b2b9882216c79846cfde649d136e65dca6fa2
+  select: [231, 297]

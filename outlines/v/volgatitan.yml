@@ -1,0 +1,11 @@
+taxon: Volgatitan
+title: Outline of Volgatitan
+depicts: Volgatitan
+creator: Slate Weasel
+source: https://commons.wikimedia.org/wiki/File:Volgatitan_Skeletal.svg
+license: CC0-1.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/e/e6/Volgatitan_Skeletal.svg
+  sha1: 832a1282bc58af2988094bbb405c8d2f246411db
+  keep_open:
+    - [8588, 7603]

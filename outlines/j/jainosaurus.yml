@@ -1,0 +1,13 @@
+taxon: Jainosaurus
+title: Outline of Jainosaurus
+depicts: Jainosaurus
+creator: DaDinoNerdBoi
+source: https://commons.wikimedia.org/wiki/File:Jainosaurus_Skeletal_V3_updated.png
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/b/b7/Jainosaurus_Skeletal_V3_updated.png
+  sha1: 5425c01da28a046407326d9446e29c5ce5fd0677
+  erase:
+    - [2951, 347, 4111, 1315]
+  erase_lines:
+    - [2984, 1314, 2984, 1314, 167]

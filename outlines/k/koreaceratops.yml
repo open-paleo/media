@@ -1,0 +1,10 @@
+taxon: Koreaceratops
+title: Outline of Koreaceratops
+depicts: Koreaceratops hwaseongensis
+creator: "PARK Jin-Young & SON Minyoung"
+source: https://commons.wikimedia.org/wiki/File:Koreaceratops_skeletal_drawing_(PARK_%26_SON,_2022).jpg
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/0/0d/Koreaceratops_skeletal_drawing_%28PARK_%26_SON%2C_2022%29.jpg
+  sha1: 7b7e21ceeee2471577bcdcfc8933f6a1b4708211
+  select: [458, 477]

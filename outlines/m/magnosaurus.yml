@@ -1,0 +1,11 @@
+taxon: Magnosaurus
+title: Outline of Magnosaurus
+depicts: Magnosaurus nethercombensis
+creator: Conty
+source: https://commons.wikimedia.org/wiki/File:Magnosaurus_OUMNH_J._12143.png
+license: CC-BY-3.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/f/fd/Magnosaurus_OUMNH_J._12143.png
+  sha1: 50b09c638de7be0f7873af9263907bd8e8a8c760
+  threshold: 220

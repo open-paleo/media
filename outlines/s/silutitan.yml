@@ -1,0 +1,12 @@
+taxon: Silutitan
+title: Outline of Silutitan
+depicts: Silutitan sinensis
+creator: Armin Reindl
+source: https://commons.wikimedia.org/wiki/File:Silutitan_skeletal_reconstruction.png
+license: CC-BY-SA-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/a/a5/Silutitan_skeletal_reconstruction.png
+  sha1: e3d92905348729be3b90b8cf4c6e13cc1d6601ba
+  fill:
+    - [2314, 1846]

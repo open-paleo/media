@@ -1,0 +1,23 @@
+taxon: Thyreosaurus
+title: Outline of Thyreosaurus
+depicts: Thyreosaurus atlasicus
+creator: SlvrHwk
+source: https://commons.wikimedia.org/wiki/File:Thyreosaurus_Skeletal.svg
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/3/37/Thyreosaurus_Skeletal.svg
+  sha1: d3e56ac5ed0bfeed3b911a0696f376cc8bdad006
+  erase_lines:
+    - [489, 69, 479, 69, 19]
+    - [479, 69, 469, 69, 19]
+    - [469, 69, 459, 69, 19]
+    - [459, 69, 449, 69, 19]
+    - [449, 69, 438, 69, 19]
+    - [438, 69, 428, 69, 19]
+    - [428, 69, 418, 69, 19]
+    - [418, 69, 408, 69, 19]
+    - [408, 69, 398, 69, 19]
+    - [398, 69, 388, 69, 19]
+    - [388, 69, 378, 71, 19]
+    - [378, 71, 368, 73, 19]
+    - [358, 73, 358, 73, 19]

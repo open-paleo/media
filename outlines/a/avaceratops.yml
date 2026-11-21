@@ -1,0 +1,22 @@
+taxon: Avaceratops
+title: Outline of Avaceratops
+depicts: Avaceratops
+creator: "User:Slate Weasel"
+source: https://commons.wikimedia.org/wiki/File:Avaceratops_Scale.svg
+license: PDM-1.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/f/f3/Avaceratops_Scale.svg
+  sha1: 2b3e748e363c4438cd786734d176b23353e567e3
+  keep_open:
+    - [364, 568]
+    - [489, 571]
+  erase:
+    - [187, 267, 779, 302]
+    - [177, 269, 543, 330]
+    - [596, 285, 797, 314]
+  erase_lines:
+    - [552, 317, 561, 304, 31]
+    - [561, 304, 575, 297, 31]
+    - [575, 297, 591, 294, 31]
+    - [591, 294, 602, 305, 31]

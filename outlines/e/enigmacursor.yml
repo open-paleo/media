@@ -1,0 +1,12 @@
+taxon: Enigmacursor
+title: Outline of Enigmacursor
+depicts: Enigmacursor
+creator: Maidment and Barrett (2025)
+source: https://commons.wikimedia.org/wiki/File:Skeletal_and_life_reconstruction_of_Enigmacursor.jpg
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/8/84/Skeletal_and_life_reconstruction_of_Enigmacursor.jpg
+  sha1: 1396689fb388d323a11cc4c6130928ceaa5aa640
+  select: [426, 160]
+  erase:
+    - [36, 289, 960, 456]
