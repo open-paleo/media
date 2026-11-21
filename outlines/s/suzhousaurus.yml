@@ -1,0 +1,12 @@
+taxon: Suzhousaurus
+title: Outline of Suzhousaurus
+depicts: Suzhousaurus megatherioides
+creator: PaleoNeolitic
+source: https://commons.wikimedia.org/wiki/File:Suzhousaurus_Skeletal.png
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/2/20/Suzhousaurus_Skeletal.png
+  sha1: 7a6d5a26013b621e78c5f40e03c28c909a1a4168
+  keep_open:
+    - [7966, 7030]
+    - [5621, 6099]

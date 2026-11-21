@@ -1,0 +1,11 @@
+taxon: Amazonsaurus
+title: Outline of Amazonsaurus
+depicts: Amazonsaurus maranhensis
+creator: Slate Weasel
+source: https://commons.wikimedia.org/wiki/File:Amazonsaurus_Skeletal.svg
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/0/05/Amazonsaurus_Skeletal.svg
+  sha1: f1f189c42c7541c648d7e000db63214d8c5e5a58
+  keep_open:
+    - [4914, 2591]

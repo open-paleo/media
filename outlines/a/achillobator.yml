@@ -1,0 +1,12 @@
+taxon: Achillobator
+title: Outline of Achillobator
+depicts: Achillobator giganticus
+creator: PaleoNeolitic
+source: https://commons.wikimedia.org/wiki/File:Achillobator_Skeleton_Reconstruction.jpg
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/2/20/Achillobator_Skeleton_Reconstruction.jpg
+  sha1: 5901e9930af83a57bfed18fb3ac7e65a73764dd3
+  close: 1.5
+  fill:
+    - [737, 1982]

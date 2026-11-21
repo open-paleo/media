@@ -1,0 +1,11 @@
+taxon: Edmontosaurus
+title: Outline of Edmontosaurus
+depicts: Edmontosaurus annectens
+creator: Gunnar Bivens
+source: https://commons.wikimedia.org/wiki/File:Edmontosaurus_annectens_Multiview_Skeletal.png
+license: CC-BY-SA-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/5/5a/Edmontosaurus_annectens_Multiview_Skeletal.png
+  sha1: ad6ec17cc2bf251480b00dd77c5cb6c9dab1d96b
+  close: 1.5

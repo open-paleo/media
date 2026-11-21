@@ -1,0 +1,11 @@
+taxon: Hamititan
+title: Outline of Hamititan
+depicts: Hamititan xinjiangensis
+creator: Armin Reindl
+source: https://commons.wikimedia.org/wiki/File:Hamititan_skeletal.jpg
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/b/b0/Hamititan_skeletal.jpg
+  sha1: f8ede8dcce32cef85eb62c6f04052e8bf9d1dcb2
+  keep_open:
+    - [4579, 3577]

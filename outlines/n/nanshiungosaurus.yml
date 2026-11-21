@@ -1,0 +1,12 @@
+taxon: Nanshiungosaurus
+title: Outline of Nanshiungosaurus
+depicts: Nanshiungosaurus
+creator: "Jaime A. Headden (User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Nanshiungosaurus.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/f/fb/Nanshiungosaurus.jpg
+  sha1: 67d7236764b0ff5917d28bf6d0bdb065fa5fdd76
+  keep_open:
+    - [168, 106]
+    - [138, 118]

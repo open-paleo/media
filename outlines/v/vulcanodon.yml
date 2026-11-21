@@ -1,0 +1,19 @@
+taxon: Vulcanodon
+title: Outline of Vulcanodon
+depicts: Vulcanodon karibaensis
+creator: IJReid
+source: https://commons.wikimedia.org/wiki/File:Vulcanodon_skeleton.png
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/2/26/Vulcanodon_skeleton.png
+  sha1: 85e42d2e2b973f49e51d393313c4130d2a3af266
+  keep_open:
+    - [5874, 2463]
+    - [6689, 2640]
+  fill:
+    - [5804, 2927]
+  erase_lines:
+    - [6670, 2953, 6809, 2983, 283]
+    - [6809, 2983, 6947, 3022, 283]
+    - [6152, 2991, 6152, 2991, 283]

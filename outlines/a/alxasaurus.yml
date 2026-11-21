@@ -1,0 +1,11 @@
+taxon: Alxasaurus
+title: Outline of Alxasaurus
+depicts: Alxasaurus elesitaiensis
+creator: "Jaime A. Headden (User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Alxasaurus_elesitaiensis.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/a/ad/Alxasaurus_elesitaiensis.jpg
+  sha1: 5ae332e880b67ff5cba7825c181502f0ca34858c
+  keep_open:
+    - [235, 114]

@@ -1,0 +1,12 @@
+taxon: Bashanosaurus
+title: Outline of Bashanosaurus
+depicts: Bashanosaurus primitivus
+creator: SlvrHwk
+source: https://commons.wikimedia.org/wiki/File:Bashanosaurus_Skeletal.svg
+license: CC-BY-SA-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/c/c7/Bashanosaurus_Skeletal.svg
+  sha1: 08b9475cc8c7876ed0606940e5b32f680ba71587
+  keep_open:
+    - [600, 368]

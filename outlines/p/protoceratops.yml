@@ -1,0 +1,11 @@
+taxon: Protoceratops
+title: Outline of Protoceratops
+depicts: Protoceratops andrewsi
+creator: Scott Hartman
+source: https://commons.wikimedia.org/wiki/File:Protoceratops_andrewsi_skeletal.png
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/b/bb/Protoceratops_andrewsi_skeletal.png
+  sha1: 6e51e93e7bbe313de33c033e64bbdfb69e7542a4
+  keep_open:
+    - [972, 624]

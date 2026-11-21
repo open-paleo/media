@@ -1,0 +1,11 @@
+taxon: Jingiella
+title: Outline of Jingiella
+depicts: Jingiella dongxingensis
+creator: SlvrHwk
+source: https://commons.wikimedia.org/wiki/File:Jingiella_skeletal.svg
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/b/bc/Jingiella_skeletal.svg
+  sha1: 9c7859be0f26d08792342fa4165bde1af6843e9d
+  keep_open:
+    - [471, 395]

@@ -1,0 +1,10 @@
+taxon: Minimocursor
+title: Outline of Minimocursor
+depicts: Minimocursor phunoiensis
+creator: "S. Manitkoon, U Deesri, B. Khalloufi, T. Nonsrirach, V Suteethorn, P Chanthasit, W Boonla, & E Buffetaut"
+source: https://commons.wikimedia.org/wiki/File:Minimocursor_Skeletal.jpg
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/a/aa/Minimocursor_Skeletal.jpg
+  sha1: fac2642f4a299bab3c4c5a90b8acded5483e70f6
+  select: [531, 601]

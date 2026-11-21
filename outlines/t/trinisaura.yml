@@ -1,0 +1,12 @@
+taxon: Trinisaura
+title: Outline of Trinisaura
+depicts: Trinisaura
+creator: Levi B. Martinez-Reza
+source: https://commons.wikimedia.org/wiki/File:Trinisaura_esqueletico.jpg
+license: CC-BY-SA-3.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/a/a0/Trinisaura_esqueletico.jpg
+  sha1: 0e513c9a55bd009a608c51c56e6d55ade6a24a53
+  keep_open:
+    - [1708, 986]

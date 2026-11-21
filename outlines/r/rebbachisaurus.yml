@@ -1,0 +1,12 @@
+taxon: Rebbachisaurus
+title: Outline of Rebbachisaurus
+depicts: Rebbachisaurus garasbae
+creator: Slate Weasel
+source: https://commons.wikimedia.org/wiki/File:Rebbachisaurus_Skeletal.svg
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/c/cd/Rebbachisaurus_Skeletal.svg
+  sha1: 45878dd48e3cd1924e25268160b5aefe5caa1bfe
+  keep_open:
+    - [9391, 3540]

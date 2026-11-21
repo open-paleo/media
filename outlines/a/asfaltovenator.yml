@@ -1,0 +1,13 @@
+taxon: Asfaltovenator
+title: Outline of Asfaltovenator
+depicts: Asfaltovenator
+creator: "User:Slate Weasel"
+source: https://commons.wikimedia.org/wiki/File:Asfaltovenator_Scale.svg
+license: PDM-1.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/7/7a/Asfaltovenator_Scale.svg
+  sha1: 5018134a5c6f8e7d8d5c1fb43710a715e02d5d8f
+  keep_open:
+    - [864, 769]
+  fill:
+    - [1310, 484]

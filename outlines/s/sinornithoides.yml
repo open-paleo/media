@@ -1,0 +1,11 @@
+taxon: Sinornithoides
+title: Outline of Sinornithoides
+depicts: Sinornithoides youngi
+creator: "Jaime A. Headden (User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Sinornithoides_youngi.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/1/18/Sinornithoides_youngi.jpg
+  sha1: dee7684251d6dac2f1dac45ec0313dae9efa5934
+  keep_open:
+    - [293, 118]

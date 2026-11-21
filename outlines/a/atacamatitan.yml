@@ -1,0 +1,11 @@
+taxon: Atacamatitan
+title: Outline of Atacamatitan
+depicts: Atacamatitan chilensis
+creator: PaleoNeolitic
+source: https://commons.wikimedia.org/wiki/File:Atacamatitan_Skeleton_Reconstruction.jpg
+license: CC-BY-SA-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/e/ed/Atacamatitan_Skeleton_Reconstruction.jpg
+  sha1: f32042693dc28dba7361642e5f56ea641f6a5bb7
+  keep_open:
+    - [4624, 4315]

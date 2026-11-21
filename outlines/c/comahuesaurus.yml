@@ -1,0 +1,11 @@
+taxon: Comahuesaurus
+title: Outline of Comahuesaurus
+depicts: Comahuesaurus windhauseni
+creator: Slate Weasel
+source: https://commons.wikimedia.org/wiki/File:Comahuesaurus_Skeletal_V0.svg
+license: CC-BY-4.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/e/ee/Comahuesaurus_Skeletal_V0.svg
+  sha1: 128c5e81c572dfe2dcc38cb10aa724bc74950b16
+  keep_open:
+    - [3729, 1990]

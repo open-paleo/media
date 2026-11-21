@@ -1,0 +1,16 @@
+taxon: Alcovasaurus
+title: Outline of Alcovasaurus
+depicts: Alcovasaurus longispinus
+creator: Gunnar Bivens
+source: https://commons.wikimedia.org/wiki/File:Alcovasaurus_longispinus_Skeletal.png
+license: CC-BY-SA-4.0
+mirrored: true
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/e/ed/Alcovasaurus_longispinus_Skeletal.png
+  sha1: fb1ef2bc231c6461b8718425d88b394cf6c8b47d
+  erase_lines:
+    - [7052, 3628, 6905, 3598, 296]
+    - [6905, 3598, 6756, 3597, 296]
+    - [6756, 3597, 6606, 3618, 296]
+    - [4626, 3633, 4474, 3633, 296]
+    - [4474, 3633, 4326, 3617, 296]

@@ -1,0 +1,11 @@
+taxon: Harpymimus
+title: Outline of Harpymimus
+depicts: Harpymimus okladnikovi
+creator: "Jaime Headden (en:User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Harpymimus_okladnikovi_headden.jpg
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/c/ca/Harpymimus_okladnikovi_headden.jpg
+  sha1: 0b101ab44c4459ac551d6b18ff6d34a49868013b
+  threshold: 215
+  close: 2.5

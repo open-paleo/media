@@ -1,0 +1,10 @@
+taxon: Caudipteryx
+title: Outline of Caudipteryx
+depicts: Caudipteryx
+creator: "Jaime A. Headden (User:Qilong)"
+source: https://commons.wikimedia.org/wiki/File:Caudipteryx.gif
+license: CC-BY-3.0
+trace:
+  image: https://upload.wikimedia.org/wikipedia/commons/9/9e/Caudipteryx.gif
+  sha1: e3caf737e76cbd9170edc4f0e90fbfb2fa00c6db
+  select: [201, 134]
