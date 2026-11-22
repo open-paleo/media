@@ -1,0 +1,16 @@
+taxon: Tameryraptor
+title: Outline of Tameryraptor
+depicts: Tameryraptor
+creator: "Maximilian Kellermann, Elena Cuesta and Oliver W. M. Rauhut"
+source: https://doi.org/10.1371/journal.pone.0311096
+license: CC-BY-4.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0311096.g004
+  sha1: 2a06db962d57609e59807b7d6cc055491a1026b0
+  erase_lines:
+    - [1294, 614, 1294, 614, 62]
+    - [1273, 614, 1273, 614, 62]
+    - [1243, 614, 1243, 614, 62]
+    - [1232, 614, 1232, 614, 62]
+    - [1206, 602, 1206, 602, 62]
+    - [1200, 602, 1200, 602, 62]

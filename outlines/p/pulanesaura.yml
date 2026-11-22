@@ -1,0 +1,32 @@
+taxon: Pulanesaura
+title: Outline of Pulanesaura
+depicts: Pulanesaura eocollum
+creator: "Blair W. McPhee, Matthew F. Bonnan, Adam M. Yates, Johann Neveling and Jonah N. Choiniere"
+source: https://doi.org/10.1038/srep13224
+license: CC-BY-4.0
+trace:
+  image: https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fsrep13224/MediaObjects/41598_2015_Article_BFsrep13224_Fig3_HTML.jpg
+  sha1: 7e98a9336a45874f2bdad95f7ba53c96b0cfa7be
+  select: [1000, 450]
+  keep_open:
+    - [967, 671]
+  erase_lines:
+    - [464, 510, 464, 510, 46]
+    - [466, 511, 466, 511, 46]
+    - [563, 405, 563, 405, 46]
+    - [569, 407, 569, 407, 46]
+    - [581, 402, 581, 402, 46]
+    - [581, 403, 581, 403, 46]
+    - [582, 405, 582, 405, 46]
+    - [718, 338, 718, 338, 46]
+    - [719, 341, 719, 341, 46]
+    - [721, 347, 721, 347, 46]
+    - [789, 344, 789, 344, 46]
+    - [837, 346, 837, 346, 46]
+    - [862, 347, 862, 347, 46]
+    - [1053, 357, 1053, 357, 46]
+    - [1032, 350, 1032, 350, 46]
+    - [1030, 353, 1030, 353, 46]
+    - [1064, 534, 1064, 534, 46]
+    - [1044, 539, 1044, 539, 46]
+    - [1028, 541, 1028, 541, 46]

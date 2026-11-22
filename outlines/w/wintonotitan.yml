@@ -1,0 +1,18 @@
+taxon: Wintonotitan
+title: Outline of Wintonotitan
+depicts: Wintonotitan wattsi
+creator: T. Tischler
+source: https://doi.org/10.1371/journal.pone.0006190
+license: CC-BY-4.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0006190.g002
+  sha1: dfc98f51ec5d4a310a6f10fd45579a779c7636e3
+  select: [1900, 3200]
+  erase_lines:
+    - [2408, 3377, 2408, 3377, 114]
+    - [2410, 3359, 2410, 3359, 114]
+    - [2409, 3341, 2409, 3341, 114]
+    - [2412, 3321, 2412, 3321, 114]
+    - [2462, 3316, 2462, 3316, 114]
+    - [2511, 3314, 2511, 3314, 114]
+    - [2563, 3312, 2563, 3312, 114]

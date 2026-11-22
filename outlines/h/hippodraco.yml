@@ -1,0 +1,10 @@
+taxon: Hippodraco
+title: Outline of Hippodraco
+depicts: Hippodraco scutodens
+creator: "Andrew T. McDonald, James I. Kirkland, Donald D. DeBlieux, Scott K. Madsen, Jennifer Cavin, Andrew R. C. Milner and Lukas Panzarin"
+source: https://doi.org/10.1371/journal.pone.0014075
+license: CC0-1.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0014075.g019
+  sha1: ef5c5616610f8a2953ed0da8200994920cd6a518
+  select: [900, 300]

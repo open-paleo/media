@@ -1,0 +1,10 @@
+taxon: Iguanacolossus
+title: Outline of Iguanacolossus
+depicts: Iguanacolossus fortis
+creator: "Andrew T. McDonald, James I. Kirkland, Donald D. DeBlieux, Scott K. Madsen, Jennifer Cavin, Andrew R. C. Milner and Lukas Panzarin"
+source: https://doi.org/10.1371/journal.pone.0014075
+license: CC0-1.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0014075.g003
+  sha1: 0cc23ce7d525a530c8c0f2caf8decd189c5acb3d
+  select: [800, 300]

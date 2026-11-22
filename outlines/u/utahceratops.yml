@@ -1,0 +1,10 @@
+taxon: Utahceratops
+title: Outline of Utahceratops
+depicts: Utahceratops gettyi
+creator: "Scott D. Sampson, Mark A. Loewen, Andrew A. Farke, Eric M. Roberts, Catherine A. Forster, Joshua A. Smith and Alan L. Titus"
+source: https://doi.org/10.1371/journal.pone.0012292
+license: CC-BY-4.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0012292.g002
+  sha1: e58801c1831d2f5697c4e1fd249179c1dda319e8
+  select: [1000, 650]

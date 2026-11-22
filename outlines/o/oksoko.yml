@@ -1,0 +1,9 @@
+taxon: Oksoko
+title: Outline of Oksoko
+depicts: Oksoko avarsan
+creator: "Gregory F. Funston, Tsogtbaatar Chinzorig, Khishigjav Tsogtbaatar, Yoshitsugu Kobayashi, Corwin Sullivan and Philip J. Currie"
+source: https://doi.org/10.1098/rsos.201184
+license: CC-BY-4.0
+trace:
+  sha1: 2069a3b9ccdfbf5341353fe389da0b2dc076ec20
+  select: [880, 700]

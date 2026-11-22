@@ -1,0 +1,13 @@
+taxon: Anzu
+title: Outline of Anzu
+depicts: Anzu wyliei
+creator: "Matthew C. Lamanna, Hans-Dieter Sues, Emma R. Schachner and Tyler R. Lyson"
+source: https://doi.org/10.1371/journal.pone.0092022
+license: CC0-1.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0092022.g004
+  sha1: f382c02a52ad081a09a163fe67b5304719486f1a
+  erase_lines:
+    - [886, 858, 886, 858, 99]
+    - [886, 879, 886, 879, 99]
+    - [888, 885, 888, 885, 99]

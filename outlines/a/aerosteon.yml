@@ -1,0 +1,23 @@
+taxon: Aerosteon
+title: Outline of Aerosteon
+depicts: Aerosteon riocoloradensis
+creator: "Paul C. Sereno, Ricardo N. Martinez, Jeffrey A. Wilson, David J. Varricchio, Oscar A. Alcober and Hans C. E. Larsson"
+source: https://doi.org/10.1371/journal.pone.0003303
+license: CC-BY-4.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0003303.g016
+  sha1: e47196f1679d45090f997fcc357b8090510bcc17
+  erase_lines:
+    - [585, 1347, 585, 1347, 122]
+    - [557, 1403, 557, 1403, 122]
+    - [550, 1429, 550, 1429, 122]
+    - [544, 1447, 544, 1447, 122]
+    - [602, 1938, 602, 1938, 122]
+    - [1044, 2322, 991, 2290, 122]
+    - [991, 2290, 950, 2243, 122]
+    - [922, 2212, 922, 2212, 122]
+    - [910, 2211, 910, 2211, 122]
+    - [909, 2206, 909, 2206, 122]
+    - [1593, 1491, 1593, 1491, 122]
+    - [1583, 1503, 1583, 1503, 122]
+    - [2254, 2082, 2254, 2082, 122]

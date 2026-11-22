@@ -1,0 +1,11 @@
+taxon: Siamraptor
+title: Outline of Siamraptor
+depicts: Siamraptor suwati
+creator: "Duangsuda Chokchaloemwong, Soki Hattori, Elena Cuesta, Pratueng Jintasakul, Masateru Shibata and Yoichi Azuma"
+source: https://doi.org/10.1371/journal.pone.0222489
+license: CC-BY-4.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0222489.g002
+  sha1: 0b4b98b219f1959c35bd664cc629528cf822653a
+  keep_open:
+    - [1839, 842]

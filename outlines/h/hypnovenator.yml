@@ -1,0 +1,23 @@
+taxon: Hypnovenator
+title: Outline of Hypnovenator
+depicts: Hypnovenator matsubaraetoheorum
+creator: Genya Masukawa
+source: https://doi.org/10.1038/s41598-024-66815-2
+license: CC-BY-4.0
+trace:
+  image: https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-024-66815-2/MediaObjects/41598_2024_66815_Fig2_HTML.png
+  sha1: 27fd39a07f565349c8ebd138e3f3e0b3b97f5a2a
+  select: [740, 1090]
+  erase:
+    - [0, 0, 1400, 805]
+    - [400, 805, 1400, 925]
+  erase_lines:
+    - [403, 851, 394, 880, 59]
+    - [394, 880, 391, 848, 59]
+    - [391, 848, 386, 818, 59]
+    - [386, 818, 360, 834, 59]
+    - [360, 834, 352, 863, 59]
+    - [352, 863, 326, 847, 59]
+    - [326, 847, 308, 823, 59]
+    - [308, 823, 281, 810, 59]
+    - [341, 807, 341, 807, 59]

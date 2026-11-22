@@ -1,0 +1,9 @@
+taxon: Qianlong
+title: Outline of Qianlong
+depicts: Qianlong shouhu
+creator: "Fenglu Han, Yilun Yu, Shukang Zhang, Rong Zeng, Xinjin Wang, Huiyang Cai, Tianzhuang Wu, Yingfeng Wen, Sifu Cai, Chun Li, Rui Wu, Qi Zhao and Xing Xu"
+source: https://doi.org/10.1093/nsr/nwad258
+license: CC-BY-4.0
+trace:
+  sha1: 89754df00b5d614a5422f403d90ba1e35bb649c8
+  select: [800, 690]

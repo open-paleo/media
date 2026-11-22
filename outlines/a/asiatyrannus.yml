@@ -1,0 +1,12 @@
+taxon: Asiatyrannus
+title: Outline of Asiatyrannus
+depicts: Asiatyrannus xui
+creator: "Scott Hartman, scaled by Wenjie Zheng, Xingsheng Jin, Junfang Xie and Tianming Du"
+source: https://doi.org/10.1038/s41598-024-66278-5
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-024-66278-5/MediaObjects/41598_2024_66278_Fig1_HTML.png
+  sha1: 8f8ff94fe14adccbe6cb82f201f17c235ea62a46
+  erase:
+    - [684, 736, 1322, 794]

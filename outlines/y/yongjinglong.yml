@@ -1,0 +1,19 @@
+taxon: Yongjinglong
+title: Outline of Yongjinglong
+depicts: Yongjinglong datangi
+creator: "Li-Guo Li, Da-Qing Li, Hai-Lu You and Peter Dodson"
+source: https://doi.org/10.1371/journal.pone.0085979
+license: CC-BY-4.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0085979.g017
+  sha1: db82c35942516fa994dce39b95a26d4d1753998a
+  fill:
+    - [221, 191]
+    - [716, 298]
+    - [1300, 508]
+    - [475, 635]
+    - [443, 501]
+    - [602, 356]
+    - [678, 328]
+    - [765, 308]
+    - [1347, 507]

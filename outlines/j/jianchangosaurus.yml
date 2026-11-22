@@ -1,0 +1,10 @@
+taxon: Jianchangosaurus
+title: Outline of Jianchangosaurus
+depicts: Jianchangosaurus yixianensis
+creator: "Hanyong Pu, Yoshitsugu Kobayashi, Junchang Lü, Li Xu, Yanhua Wu, Huali Chang, Jiming Zhang and Songhai Jia"
+source: https://doi.org/10.1371/journal.pone.0063423
+license: CC-BY-4.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0063423.g002
+  sha1: 1f3852dbd940ed297f60ec547715aad3de35e079
+  select: [800, 300]
