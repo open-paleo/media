@@ -1,3 +1,4 @@
+import * as crypto from "node:crypto";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import * as url from "node:url";
@@ -62,6 +63,27 @@ export type Outline = {
 };
 
 /**
+ * The files under outlines/, by outline: paths under outlines/ without their extensions.
+ */
+type OutlineFiles = {
+    /**
+     * The outlines with a .yml record.
+     */
+    recordIds: Set<string>;
+
+    /**
+     * The outlines with an .svg file.
+     */
+    svgIds: Set<string>;
+
+    /**
+     * The image files traced from, beside their records, by outline: "t/talos" to
+     * "t/talos.original.png".
+     */
+    originalFiles: Map<string, string>;
+};
+
+/**
  * An outline's record, without its SVG file.
  */
 export type OutlineRecord = Omit<Outline, "svg">;
@@ -71,9 +93,15 @@ export type OutlineRecord = Omit<Outline, "svg">;
  */
 export type TraceSettings = {
     /**
-     * The address of the full-size image file.
+     * The address of the full-size image file, unless the file sits beside the record.
      */
-    image: string;
+    image: string | undefined;
+
+    /**
+     * The image file beside the record, such as "outlines/t/talos.original.png", when there is no
+     * address to fetch it from.
+     */
+    original: string | undefined;
 
     /**
      * The image file's SHA-1, in hex.
@@ -152,6 +180,9 @@ const maximumSvgBytes = 200_000;
 
 // File names: lowercase words joined by hyphens.
 const idPattern = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+// An image an outline is traced from, kept beside its record: "talos.original.png".
+const originalPattern = /^(.+)\.original\.(png|jpg|jpeg|tif|tiff|webp|gif)$/;
 
 // Parts of an SVG that could run code, load something from elsewhere, or embed a raster image.
 const unsafeSvgPatterns: Array<[RegExp, string]> = [
@@ -248,14 +279,49 @@ function isStroke(value: unknown): value is [number, number, number, number, num
 }
 
 /**
+ * Find the original image beside an outline's record, if there is one.
+ *
+ * @param id - The outline's path under outlines/ without its extension.
+ * @returns The image's path from the repository's root, such as "outlines/t/talos.original.png".
+ */
+function findOriginalFile(id: string): string | undefined
+{
+    const [folder, base] = id.split("/");
+
+    for (const name of fs.readdirSync(path.join(outlinesDirectory, folder)))
+    {
+        const match = originalPattern.exec(name);
+
+        if (match && match[1] === base)
+        {
+            return "outlines/" + folder + "/" + name;
+        }
+    }
+
+    return undefined;
+}
+
+/**
+ * Get a file's SHA-1.
+ *
+ * @param bytes - The file's contents.
+ * @returns The SHA-1, in lowercase hex.
+ */
+export function getSha1(bytes: Uint8Array): string
+{
+    return crypto.createHash("sha1").update(bytes).digest("hex");
+}
+
+/**
  * Read a record's trace block.
  *
  * @param value - The block.
  * @param recordFile - The record, for problems.
+ * @param original - The original image beside the record, if there is one.
  * @param problems - Where to add problems.
  * @returns The settings, or undefined if the block cannot be used.
  */
-function readTraceSettings(value: unknown, recordFile: string, problems: Array<string>): TraceSettings | undefined
+function readTraceSettings(value: unknown, recordFile: string, original: string | undefined, problems: Array<string>): TraceSettings | undefined
 {
     if (typeof value !== "object" || value === null || Array.isArray(value))
     {
@@ -281,15 +347,25 @@ function readTraceSettings(value: unknown, recordFile: string, problems: Array<s
     const threshold = fields.threshold ?? defaultTraceThreshold;
     let isUsable = true;
 
-    if (typeof fields.image !== "string" || !fields.image.startsWith("https://"))
+    if (original && fields.image !== undefined)
     {
-        problems.push(recordFile + ": trace needs the https:// address of the image file");
+        problems.push(recordFile + ": the image is " + original + ", so the trace block takes no image address");
+        isUsable = false;
+    }
+    else if (!original && (typeof fields.image !== "string" || !fields.image.startsWith("https://")))
+    {
+        problems.push(recordFile + ": trace needs the https:// address of the image file, or the image beside the record as " + recordFile.replace(/\.yml$/, ".original.png") + " (or .jpg, .tif)");
         isUsable = false;
     }
 
     if (typeof fields.sha1 !== "string" || !/^[0-9a-f]{40}$/.test(fields.sha1))
     {
         problems.push(recordFile + ": trace needs the image file's SHA-1, 40 lowercase hex digits");
+        isUsable = false;
+    }
+    else if (original && getSha1(fs.readFileSync(path.join(rootDirectory, original))) !== fields.sha1)
+    {
+        problems.push(original + ": its SHA-1 differs from the one in " + recordFile);
         isUsable = false;
     }
 
@@ -341,7 +417,8 @@ function readTraceSettings(value: unknown, recordFile: string, problems: Array<s
     }
 
     return {
-        image: fields.image as string,
+        image: original ? undefined : fields.image as string,
+        original,
         sha1: fields.sha1 as string,
         threshold: threshold as number,
         keepOpen: keepOpen as Array<[number, number]>,
@@ -415,7 +492,14 @@ export function readOutlineRecord(id: string, problems: Array<string>): OutlineR
         problems.push(recordFile + ": the source must be an https:// address");
     }
 
-    const trace = fields.trace === undefined ? undefined : readTraceSettings(fields.trace, recordFile, problems);
+    const original = findOriginalFile(id);
+
+    if (original && fields.trace === undefined)
+    {
+        problems.push(original + ": an original image needs a trace block in " + recordFile);
+    }
+
+    const trace = fields.trace === undefined ? undefined : readTraceSettings(fields.trace, recordFile, original, problems);
 
     if (fields.trace !== undefined && !trace)
     {
@@ -470,13 +554,13 @@ function readOutline(id: string, problems: Array<string>): Outline | undefined
  * Find the outline files: each in the folder of its first letter, such as outlines/t/.
  *
  * @param problems - Where to add problems about files in the wrong place.
- * @returns The paths of the records and of the SVG files, under outlines/ and without their
- * extensions.
+ * @returns The records, SVG files and original images.
  */
-export function findOutlineFiles(problems: Array<string>): [Set<string>, Set<string>]
+export function findOutlineFiles(problems: Array<string>): OutlineFiles
 {
     const recordIds = new Set<string>();
     const svgIds = new Set<string>();
+    const originalFiles = new Map<string, string>();
 
     for (const folder of fs.readdirSync(outlinesDirectory, { withFileTypes: true }))
     {
@@ -494,13 +578,21 @@ export function findOutlineFiles(problems: Array<string>): [Set<string>, Set<str
 
         for (const name of fs.readdirSync(path.join(outlinesDirectory, folder.name)).sort())
         {
+            const original = originalPattern.exec(name);
+
+            if (original && original[1].startsWith(folder.name) && idPattern.test(original[1]))
+            {
+                originalFiles.set(folder.name + "/" + original[1], folder.name + "/" + name);
+                continue;
+            }
+
             const extension = path.extname(name);
             const base = path.basename(name, extension);
             const id = folder.name + "/" + base;
 
             if (extension !== ".yml" && extension !== ".svg")
             {
-                problems.push("outlines/" + id + extension + ": only .yml records and .svg outlines belong here");
+                problems.push("outlines/" + id + extension + ": only .yml records, .svg outlines and the .original images they are traced from belong here");
             }
             else if (!base.startsWith(folder.name))
             {
@@ -517,7 +609,7 @@ export function findOutlineFiles(problems: Array<string>): [Set<string>, Set<str
         }
     }
 
-    return [recordIds, svgIds];
+    return { recordIds, svgIds, originalFiles };
 }
 
 /**
@@ -529,13 +621,21 @@ export function readMediaSource(): MediaSource
 {
     const problems = new Array<string>();
     const outlines = new Array<Outline>();
-    const [recordIds, svgIds] = findOutlineFiles(problems);
+    const { recordIds, svgIds, originalFiles } = findOutlineFiles(problems);
 
     for (const id of svgIds)
     {
         if (!recordIds.has(id))
         {
             problems.push("outlines/" + id + ".svg: has no outlines/" + id + ".yml record");
+        }
+    }
+
+    for (const [id, file] of originalFiles)
+    {
+        if (!recordIds.has(id))
+        {
+            problems.push("outlines/" + file + ": has no outlines/" + id + ".yml record");
         }
     }
 

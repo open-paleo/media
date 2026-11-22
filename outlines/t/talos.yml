@@ -1,0 +1,9 @@
+taxon: Talos
+title: Outline of Talos
+depicts: Talos sampsoni
+creator: "Lindsay E. Zanno, David J. Varricchio, Patrick M. O'Connor, Alan L. Titus and Michael J. Knell"
+source: https://doi.org/10.1371/journal.pone.0024487
+license: CC0-1.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0024487.g001
+  sha1: 3abf10c79654120ad1bce7b69b311497579fe000

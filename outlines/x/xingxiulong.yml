@@ -1,0 +1,11 @@
+taxon: Xingxiulong
+title: Outline of Xingxiulong
+depicts: Xingxiulong chengi
+creator: "Ya-Ming Wang, Hai-Lu You and Tao Wang"
+source: https://doi.org/10.1038/srep41881
+license: CC-BY-4.0
+trace:
+  image: https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fsrep41881/MediaObjects/41598_2017_Article_BFsrep41881_Fig2_HTML.jpg
+  sha1: 10d55dd68c2d93f34b01c826fcd7eb78d245cb88
+  keep_open:
+    - [565, 787]

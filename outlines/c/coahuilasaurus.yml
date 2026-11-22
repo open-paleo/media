@@ -1,0 +1,9 @@
+taxon: Coahuilasaurus
+title: Outline of Coahuilasaurus
+depicts: Coahuilasaurus lipani
+creator: "Nicholas R. Longrich, Angel Alejandro Ramirez Velasco, Jim Kirkland, Andrés Eduardo Bermúdez Torres and Claudia Inés Serrano-Brañas"
+source: https://doi.org/10.3390/d16090531
+license: CC-BY-4.0
+trace:
+  sha1: 6accc6e46c16a8988217548a1c4a3f112df7bfff
+  select: [2200, 2250]

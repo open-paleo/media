@@ -1,0 +1,10 @@
+taxon: Europelta
+title: Outline of Europelta
+depicts: Europelta carbonensis
+creator: "James I. Kirkland, Luis Alcalá, Mark A. Loewen, Eduardo Espílez, Luis Mampel and Jelle P. Wiersma"
+source: https://doi.org/10.1371/journal.pone.0080405
+license: CC-BY-3.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0080405.g033
+  sha1: 9e3705848ff6bdc3a68c9e9e5420414aa3e27e23
+  select: [2700, 1100]

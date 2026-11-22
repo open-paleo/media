@@ -1,0 +1,21 @@
+taxon: Australovenator
+title: Outline of Australovenator
+depicts: Australovenator wintonensis
+creator: T. Tischler
+source: https://doi.org/10.1371/journal.pone.0006190
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0006190.g002
+  sha1: dfc98f51ec5d4a310a6f10fd45579a779c7636e3
+  select: [1700, 4330]
+  erase_lines:
+    - [1377, 4537, 1377, 4537, 114]
+    - [1380, 4490, 1380, 4490, 114]
+    - [1394, 4442, 1394, 4442, 114]
+    - [1427, 4436, 1427, 4436, 114]
+    - [1471, 4439, 1471, 4439, 114]
+    - [1531, 4440, 1531, 4440, 114]
+    - [1545, 4433, 1545, 4433, 114]
+    - [1501, 4431, 1501, 4431, 114]
+    - [1456, 4435, 1456, 4435, 114]

@@ -1,0 +1,12 @@
+taxon: Seitaad
+title: Outline of Seitaad
+depicts: Seitaad ruessi
+creator: Joseph J. W. Sertich and Mark A. Loewen
+source: https://doi.org/10.1371/journal.pone.0009789
+license: CC-BY-4.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0009789.g001
+  sha1: b66ae2ea5f5d1cab5c93ed3bb6ee8a2b1367ce62
+  select: [1600, 3500]
+  erase:
+    - [1452, 4060, 3058, 4152]

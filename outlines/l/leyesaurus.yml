@@ -1,0 +1,10 @@
+taxon: Leyesaurus
+title: Outline of Leyesaurus
+depicts: Leyesaurus marayensis
+creator: "Cecilia Apaldetti, Ricardo N. Martinez, Oscar A. Alcober and Diego Pol, after Ricardo N. Martínez"
+source: https://doi.org/10.1371/journal.pone.0026964
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0026964.g002
+  sha1: 3477cef82b8baf18f35608e4adffe52ac0beb31f

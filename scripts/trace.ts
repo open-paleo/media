@@ -1,11 +1,10 @@
-import * as crypto from "node:crypto";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
 import sharp from "sharp";
 
 import type { OutlineRecord, TraceSettings } from "./media-source.ts";
-import { findOutlineFiles, readOutlineRecord, rootDirectory } from "./media-source.ts";
+import { findOutlineFiles, getSha1, readOutlineRecord, rootDirectory } from "./media-source.ts";
 import type { BitmapTracer, RgbaImage, TraceReport } from "@open-paleo/outline-tracer";
 import { traceOutline } from "@open-paleo/outline-tracer";
 import { loadNodeTracer } from "@open-paleo/outline-tracer/node";
@@ -57,24 +56,27 @@ function waitFor(milliseconds: number): Promise<void>
 }
 
 /**
- * Get a file's SHA-1.
- *
- * @param bytes - The file's contents.
- * @returns The SHA-1, in hex.
- */
-function getSha1(bytes: Uint8Array): string
-{
-    return crypto.createHash("sha1").update(bytes).digest("hex");
-}
-
-/**
- * Download a trace's image, or read it from the cache, refusing it if its SHA-1 differs.
+ * Read a trace's image: the original beside its record, or else download it, or read it from the
+ * cache. Refuse it if its SHA-1 differs.
  *
  * @param trace - The trace's settings.
  * @returns The image file's contents.
  */
 async function readTraceImage(trace: TraceSettings): Promise<Buffer>
 {
+    if (trace.original)
+    {
+        const bytes = fs.readFileSync(path.join(rootDirectory, trace.original));
+
+        if (getSha1(bytes) !== trace.sha1)
+        {
+            throw new Error(trace.original + " has SHA-1 " + getSha1(bytes) + ", not " + trace.sha1 + ": the file has changed since it was traced.");
+        }
+
+        return bytes;
+    }
+
+    const image = trace.image as string;
     const cached = path.join(cacheDirectory, trace.sha1);
 
     if (fs.existsSync(cached))
@@ -84,20 +86,20 @@ async function readTraceImage(trace: TraceSettings): Promise<Buffer>
 
     for (let attempt = 1; attempt <= downloadAttempts; attempt++)
     {
-        const response = await fetch(trace.image, { headers: { "User-Agent": userAgent } });
+        const response = await fetch(image, { headers: { "User-Agent": userAgent } });
 
         if (response.status === 429 && attempt < downloadAttempts)
         {
             const wait = Number(response.headers.get("Retry-After") ?? "0") * 1000 || 30000 * attempt;
 
-            console.log("  " + trace.image + " is rate limited; waiting " + wait / 1000 + " s");
+            console.log("  " + image + " is rate limited; waiting " + wait / 1000 + " s");
             await waitFor(wait);
             continue;
         }
 
         if (!response.ok)
         {
-            throw new Error("Could not download " + trace.image + ": HTTP " + response.status);
+            throw new Error("Could not download " + image + ": HTTP " + response.status);
         }
 
         const bytes = Buffer.from(await response.arrayBuffer());
@@ -105,7 +107,7 @@ async function readTraceImage(trace: TraceSettings): Promise<Buffer>
 
         if (sha1 !== trace.sha1)
         {
-            throw new Error(trace.image + " has SHA-1 " + sha1 + ", not " + trace.sha1 + ": the file has changed since it was traced.");
+            throw new Error(image + " has SHA-1 " + sha1 + ", not " + trace.sha1 + ": the file has changed since it was traced.");
         }
 
         fs.mkdirSync(cacheDirectory, { recursive: true });
@@ -115,7 +117,7 @@ async function readTraceImage(trace: TraceSettings): Promise<Buffer>
         return bytes;
     }
 
-    throw new Error("Could not download " + trace.image);
+    throw new Error("Could not download " + image);
 }
 
 /**
@@ -189,7 +191,7 @@ function describeReport(report: TraceReport): string
  */
 function findTracedRecords(names: Array<string>, problems: Array<string>): Array<OutlineRecord>
 {
-    const [recordIds] = findOutlineFiles(problems);
+    const { recordIds } = findOutlineFiles(problems);
     const records = new Array<OutlineRecord>();
 
     for (const name of names)

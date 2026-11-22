@@ -1,0 +1,11 @@
+taxon: Murusraptor
+title: Outline of Murusraptor
+depicts: Murusraptor barrosaensis
+creator: Rodolfo A. Coria and Philip J. Currie
+source: https://doi.org/10.1371/journal.pone.0157973
+license: CC-BY-4.0
+mirrored: true
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0157973.g001
+  sha1: 60fac0c4aa6148342ac81e1cd82645b63d562b52
+  select: [1300, 2650]

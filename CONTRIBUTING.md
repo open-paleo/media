@@ -77,9 +77,9 @@ was changed.
 
 ## Tracing a skeletal reconstruction
 
-Many genera have a skeletal reconstruction on [Wikimedia Commons](https://commons.wikimedia.org)
-under an allowed license: the artist's drawing of the bones over the body's outline, in side
-view. Tracing one gives a more accurate outline than most silhouettes. Pick a figure whose
+Many genera have a skeletal reconstruction on [Wikimedia Commons](https://commons.wikimedia.org),
+or in an openly licensed paper, often the one that named the genus, under an allowed license: the
+artist's drawing of the bones over the body's outline, in side view. Tracing one gives a more accurate outline than most silhouettes. Pick a figure whose
 body is drawn solid black behind the bones; one drawn as bones alone has no outline to trace.
 
 Instead of saving an SVG, add the record with a `trace` block, then run `npm run trace` to write
@@ -102,9 +102,16 @@ trace:
 `source` is the file's Commons page, which names the artist and license; `creator` is the artist
 it names, not the uploader.
 
+For a figure from a paper, `source` is the paper's `https://doi.org/` address and `creator` the
+artist its caption credits, or else the paper's authors. Use the publisher's own figure file as
+`image` where it has one at a fixed address. Where it doesn't, for a figure only in the PDF or a
+site that refuses scripted downloads, save the figure beside the record as
+`outlines/t/talos.original.png` (or `.jpg`, `.tif`), give its `sha1`, and leave `image` out. The
+build doesn't copy the original into `dist/`.
+
 | Field | What it holds |
 |---|---|
-| `image` | The `https://` address of the full-size image file. |
+| `image` | The `https://` address of the full-size image file; left out when the file sits beside the record as `<name>.original.png`. |
 | `sha1` | The file's SHA-1, as its Commons page gives it. The script refuses a file that doesn't match, so a later upload over the same name can't change the outline unnoticed. |
 | `threshold` | Optional, 180 by default: how dark, from 0 (black) to 255 (white), a pixel must be to count as part of the drawing. Lower it if a gray background is traced; raise it if thin lines break up. |
 | `keep_open` | Optional: points, in the image's own pixels, inside spaces that must stay open. Use one where overlapping legs close off the space beneath the body, which the script would otherwise fill. |

@@ -1,0 +1,13 @@
+taxon: Zhanghenglong
+title: Outline of Zhanghenglong
+depicts: Zhanghenglong yangchengensis
+creator: "Hai Xing, Deyou Wang, Fenglu Han, Corwin Sullivan, Qingyu Ma, Yiming He, David W. E. Hone, Ronghao Yan, Fuming Du and Xing Xu"
+source: https://doi.org/10.1371/journal.pone.0098821
+license: CC-BY-4.0
+trace:
+  image: https://journals.plos.org/plosone/article/figure/image?size=original&id=10.1371/journal.pone.0098821.g002
+  sha1: e30b57cff06ff759c16dca42d46d962e73659d09
+  select: [1800, 2700]
+  keep_open:
+    - [1671, 3656]
+    - [1135, 4035]
